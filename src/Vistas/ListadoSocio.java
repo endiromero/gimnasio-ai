@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
 
-	import javax.swing.*;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import Controlador.AreaAdministracion;

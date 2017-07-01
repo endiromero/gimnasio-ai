@@ -7,9 +7,15 @@ import Negocio.Socio;
 
 public class TestSociosManager implements SociosManager {
 	
+	private static TestSociosManager instance = new TestSociosManager();
+	
+	public static TestSociosManager getInstance() {
+		return instance;
+	}
+	
 	private ArrayList<Socio> sociosBackingList = new ArrayList<Socio>();
 	
-	public TestSociosManager() {
+	private TestSociosManager() {
 		sociosBackingList.add(new Socio(0, "COCA-COLA", "AV. CABILDO 123", "4557-7788",
 				"coca@coca-cola.com"));
 		sociosBackingList.add(new Socio(1, "GOOGLE", "AV. BELGRANO 456", "4557-7711",

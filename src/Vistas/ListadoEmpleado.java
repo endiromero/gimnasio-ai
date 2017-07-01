@@ -2,23 +2,26 @@ package Vistas;
 
 
 	import java.awt.BorderLayout;
-	import java.awt.Font;
-	import java.awt.GridBagConstraints;
-	import java.awt.GridBagLayout;
-	import java.awt.Insets;
-	import java.awt.event.ActionEvent;
-	import java.awt.event.ActionListener;
-	import java.util.ArrayList;
-	import java.util.Collection;
-	import java.util.List;
-	import java.util.Vector;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowStateListener;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Vector;
 
-	import javax.swing.*;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import Controlador.AreaAdministracion;
 import Excepciones.SocioException;
 import Negocio.Socio;
+import ViewModels.VistaEmpleado;
+import ViewModels.VistaSocio;
 
 	public class ListadoEmpleado extends JFrame {
 		private JPanel pnlContenedor;
@@ -28,12 +31,14 @@ import Negocio.Socio;
 		private JLabel lblTitulo;
 		private ButtonColumn buttonColumn;
 		private JButton btnAlta;
-		private ListadoEmpleado listadoSocios;
+		private ListadoEmpleado listadoEmpleados;
+		
+		List<VistaEmpleado> items;
 
 		public ListadoEmpleado() {
-			this.listadoSocios = this;
+			this.listadoEmpleados = this;
 			// Establecer el titulo de la ventana
-			this.setTitle("Panel de Control");
+			this.setTitle("ABM de Empleados");
 			// Establecer la dimension de la ventana (ancho, alto)
 			this.setSize(750, 400);
 			// Establecer NO dimensionable la ventana
@@ -67,7 +72,7 @@ import Negocio.Socio;
 			btnAlta = new JButton("Nuevo");
 			btnAlta.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new FormEmpleado("Alta Socio", -1, ListadoEmpleado.this.listadoSocios);
+					new FormEmpleado("Alta Empleado", -1, ListadoEmpleado.this.listadoEmpleados);
 				}
 			});
 			gbc.gridx = 0; // n�mero columna
@@ -84,14 +89,15 @@ import Negocio.Socio;
 
 		private JScrollPane getJTable() {
 			tblItems = new JTable();
-			fillTable("");
 			JScrollPane scrollPane = new JScrollPane(tblItems);
+			fillTable();
 			return scrollPane;
 		}
 
-		public void fillTable(String txt) {
+		public void fillTable() {
+			items = getItems();
 			Vector<String> aux;
-			String[] cabecera = { "Id", "Nombre", "Domicilio", "Telefono", "Mail",
+			String[] cabecera = { "Codigo", "Nombre", "Telefono", "Mail", "Puesto",
 					"", "" };
 
 			dataModel = new DefaultTableModel();
@@ -100,15 +106,15 @@ import Negocio.Socio;
 			tblItems.setModel(dataModel);
 			tblItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-			List<Socio> items = getItems();
+			
 			//List<Socio> items = AreaAdministracion.getInstancia().obtenerSocios();
-			for(Socio item : items) {
+			for(VistaEmpleado item : items) {
 				aux = new Vector<String>();
-				aux.add(Integer.toString(item.getIdSocio()));
+				aux.add(Integer.toString(item.getCodigo()));
 				aux.add(item.getNombre());
-				aux.add(item.getDomicilio());
 				aux.add(item.getTelefono());
 				aux.add(item.getMail());
+				aux.add(item.getPuesto());
 				dataModel.addRow(aux);
 			}
 
@@ -119,7 +125,7 @@ import Negocio.Socio;
 				public void actionPerformed(ActionEvent e) {
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
-					new FormEmpleado("Edici�n Cliente", id, ListadoEmpleado.this.listadoSocios);
+					FormEmpleado editWindow = new FormEmpleado("Edici�n Empleado", id, ListadoEmpleado.this.listadoEmpleados);
 				}
 			};
 			buttonColumn = new ButtonColumn(tblItems, a, 5, "Editar");
@@ -128,22 +134,15 @@ import Negocio.Socio;
 				public void actionPerformed(ActionEvent e) {
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
-					Socio item = new Socio();
-					item.setIdSocio(id);
-					//AreaAdministracion.getInstancia().eliminarSocio(item);
-					System.out.println("no se ha encontrado el id");
+					AreaAdministracion.getInstancia().eliminarEmpleado(id);
+					ListadoEmpleado.this.listadoEmpleados.fillTable();
 				}
 			};
 			buttonColumn = new ButtonColumn(tblItems, a, 6, "Eliminar");
 		}
 
-	private List<Socio> getItems() {
-			List<Socio> items = new ArrayList<Socio>();
-			items.add(new Socio("COCA-COLA", "AV.CABILDO 123", "4557-7788",
-					"coca@coca-cola.com"));
-			items.add(new Socio("GOOGLE", "AV. BELGRANO 456", "4557-7711",
-					"google@gmail.com"));
-			return items;
+		private List<VistaEmpleado> getItems() {
+			return AreaAdministracion.getInstancia().obtenerEmpleados();
 		}
 	}
 
