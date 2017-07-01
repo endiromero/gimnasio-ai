@@ -51,9 +51,9 @@ public class PanelDeControl extends JFrame {
 			pnlCentro = new JPanel();
 			// setear el layout manager del panel contenedor
 			pnlContenedor.setLayout(new BorderLayout());
-			// Añadir el menu al panel contenedor
+			// Aï¿½adir el menu al panel contenedor
 			pnlContenedor.add(getMenu(), BorderLayout.PAGE_START);
-			// Añadir el panel del centro al panel contenedor
+			// Aï¿½adir el panel del centro al panel contenedor
 			pnlContenedor.add(getPanelCentro(), BorderLayout.CENTER);
 			return pnlContenedor;
 		}
@@ -205,7 +205,7 @@ public class PanelDeControl extends JFrame {
 		private JLabel getImg() {
 			JLabel picLabel = null;
 			try {
-				String pathImg = System.getProperty("user.dir") + "\\img\\gym.jpg";
+				String pathImg = "img/gym.jpg";
 				BufferedImage img = ImageIO.read(new java.io.File(pathImg));
 				picLabel = new JLabel(new ImageIcon(img));
 			} catch(IOException e) {
