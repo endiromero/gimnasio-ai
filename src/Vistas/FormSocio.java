@@ -84,7 +84,7 @@ import Negocio.Socio;
 			if(this.id == -1) 
 				lblTitulo = new JLabel("Alta Cliente");
 			else
-				lblTitulo = new JLabel("Edición Cliente");
+				lblTitulo = new JLabel("Ediciï¿½n Cliente");
 			lblTitulo.setFont(new Font("Serif", Font.BOLD, 20));
 			lblTitulo.setHorizontalAlignment(JLabel.CENTER);
 			pnlContenedor.add(lblTitulo, BorderLayout.PAGE_START);
@@ -99,8 +99,8 @@ import Negocio.Socio;
 
 			lblNombre = new JLabel("Nombre:");
 			lblNombre.setHorizontalAlignment(JLabel.RIGHT);
-			gbc.gridx = 0; // número columna
-			gbc.gridy = 0; // número fila
+			gbc.gridx = 0; // nï¿½mero columna
+			gbc.gridy = 0; // nï¿½mero fila
 			gbc.gridwidth = 1; // numero de columnas de ancho
 			gbc.gridheight = 1; // numero de filas de ancho
 			gbc.weightx = 0.1;
@@ -110,47 +110,47 @@ import Negocio.Socio;
 			pnlCentro.add(lblNombre, gbc); // agregar el label al panel contenedor
 
 			txtNombre = new JTextField();
-			gbc.gridx = 1; // número columna
-			gbc.gridy = 0; // número fila
+			gbc.gridx = 1; // nï¿½mero columna
+			gbc.gridy = 0; // nï¿½mero fila
 			gbc.weightx = 0.9;
 			pnlCentro.add(txtNombre, gbc); // agregar el textField al panel contenedor
 
 			lblDomicilio = new JLabel("Domicilio:");
 			lblDomicilio.setHorizontalAlignment(JLabel.RIGHT);
-			gbc.gridx = 0; // número columna
-			gbc.gridy = 1; // número fila
+			gbc.gridx = 0; // nï¿½mero columna
+			gbc.gridy = 1; // nï¿½mero fila
 			gbc.weightx = 0.1;
 			pnlCentro.add(lblDomicilio, gbc); // agregar el label al panel contenedor
 
 			txtDomicilio = new JTextField();
-			gbc.gridx = 1; // número columna
-			gbc.gridy = 1; // número fila
+			gbc.gridx = 1; // nï¿½mero columna
+			gbc.gridy = 1; // nï¿½mero fila
 			gbc.weightx = 0.9;
 			pnlCentro.add(txtDomicilio, gbc); // agregar el textField al panel contenedor
 
-			lblTelefono = new JLabel("Teléfono:");
+			lblTelefono = new JLabel("Telï¿½fono:");
 			lblTelefono.setHorizontalAlignment(JLabel.RIGHT);
-			gbc.gridx = 0; // número columna
-			gbc.gridy = 2; // número fila
+			gbc.gridx = 0; // nï¿½mero columna
+			gbc.gridy = 2; // nï¿½mero fila
 			gbc.weightx = 0.1;
 			pnlCentro.add(lblTelefono, gbc); // agregar el label al panel contenedor
 
 			txtTelefono = new JTextField();
-			gbc.gridx = 1; // número columna
-			gbc.gridy = 2; // número fila
+			gbc.gridx = 1; // nï¿½mero columna
+			gbc.gridy = 2; // nï¿½mero fila
 			gbc.weightx = 0.9;
 			pnlCentro.add(txtTelefono, gbc); // agregar el textField al panel contenedor
 
 			lblMail = new JLabel("Mail:");
 			lblMail.setHorizontalAlignment(JLabel.RIGHT);
-			gbc.gridx = 0; // número columna
-			gbc.gridy = 3; // número fila
+			gbc.gridx = 0; // nï¿½mero columna
+			gbc.gridy = 3; // nï¿½mero fila
 			gbc.weightx = 0.1;
 			pnlCentro.add(lblMail, gbc); // agregar el label al panel contenedor
 
 			txtMail = new JTextField();
-			gbc.gridx = 1; // número columna
-			gbc.gridy = 3; // número fila
+			gbc.gridx = 1; // nï¿½mero columna
+			gbc.gridy = 3; // nï¿½mero fila
 			gbc.weightx = 0.9;
 			pnlCentro.add(txtMail, gbc); // agregar el textField al panel contenedor
 
@@ -173,7 +173,7 @@ import Negocio.Socio;
 
 					if(txtTelefono.getText().equals("")) {
 						JOptionPane.showMessageDialog(null,
-								"Por favor ingrese el teléfono");
+								"Por favor ingrese el telï¿½fono");
 						txtTelefono.requestFocusInWindow();
 						return;
 					}
@@ -188,14 +188,19 @@ import Negocio.Socio;
 					if(id == -1)
 						AreaAdministracion.getInstancia().agregarSocio(txtNombre.getText(), txtDomicilio.getText(), txtTelefono.getText(), txtMail.getText());
 					else {
-						AreaAdministracion.getInstancia().modificarSocio(entidad.getIdSocio(), txtNombre.getText(), txtDomicilio.getText(), txtTelefono.getText(), txtMail.getText());
+						try {
+							AreaAdministracion.getInstancia().modificarSocio(entidad.getIdSocio(), txtNombre.getText(), txtDomicilio.getText(), txtTelefono.getText(), txtMail.getText());
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 					closeWin();
 				}
 			});
 
-			gbc.gridx = 0; // número columna
-			gbc.gridy = 4; // número fila
+			gbc.gridx = 0; // nï¿½mero columna
+			gbc.gridy = 4; // nï¿½mero fila
 			gbc.gridwidth = 2; // numero de columnas de ancho
 			gbc.fill = GridBagConstraints.NONE; // rellenar la celda en ambos sentidos (horizontal y vertical)
 			pnlCentro.add(btnGuardar, gbc); // agregar el textField al panel contenedor

@@ -70,8 +70,8 @@ import Negocio.Socio;
 					new FormEmpleado("Alta Socio", -1, ListadoEmpleado.this.listadoSocios);
 				}
 			});
-			gbc.gridx = 0; // número columna
-			gbc.gridy = 0; // número fila
+			gbc.gridx = 0; // nï¿½mero columna
+			gbc.gridy = 0; // nï¿½mero fila
 			gbc.gridwidth = 1; // numero de columnas de ancho
 			gbc.gridheight = 1; // numero de filas de ancho
 			gbc.weightx = 1.0;
@@ -104,7 +104,7 @@ import Negocio.Socio;
 			//List<Socio> items = AreaAdministracion.getInstancia().obtenerSocios();
 			for(Socio item : items) {
 				aux = new Vector<String>();
-				aux.add(Integer.toString(item.getidSocio()));
+				aux.add(Integer.toString(item.getIdSocio()));
 				aux.add(item.getNombre());
 				aux.add(item.getDomicilio());
 				aux.add(item.getTelefono());
@@ -119,7 +119,7 @@ import Negocio.Socio;
 				public void actionPerformed(ActionEvent e) {
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
-					new FormEmpleado("Edición Cliente", id, ListadoEmpleado.this.listadoSocios);
+					new FormEmpleado("Ediciï¿½n Cliente", id, ListadoEmpleado.this.listadoSocios);
 				}
 			};
 			buttonColumn = new ButtonColumn(tblItems, a, 5, "Editar");
@@ -129,7 +129,7 @@ import Negocio.Socio;
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
 					Socio item = new Socio();
-					item.setidSocio(id);
+					item.setIdSocio(id);
 					//AreaAdministracion.getInstancia().eliminarSocio(item);
 					System.out.println("no se ha encontrado el id");
 				}

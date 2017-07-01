@@ -17,6 +17,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import Vistas.ListadoEmpleado;
+
 public class PanelDeControl extends JFrame {
 	
 		private JPanel pnlContenedor;

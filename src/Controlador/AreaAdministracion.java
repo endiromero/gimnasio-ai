@@ -3,6 +3,8 @@ package Controlador;
 import java.util.ArrayList;
 import java.util.List;
 
+import Datos.SociosManager;
+import Datos.TestSociosManager;
 import Negocio.Abono;
 import Negocio.Clase;
 import Negocio.Deporte;
@@ -12,22 +14,14 @@ import Vistas.VistaSocio;
 public class AreaAdministracion {
 
 	private static AreaAdministracion instance;
-	private List<Socio> socios;
+	// CUANDO TENGAMOS EL MANAGER QUE LE PEGUE A LA DB, CAMBIAR EL DE TEST POR ESE NUEVO.
+	private SociosManager socios = new TestSociosManager();
 	private List<Deporte> deportes;
 	private List<Clase> clases;
 	private List<Abono> abonos;
 
 	public AreaAdministracion() {
 		super();
-		// this.socios = socios;
-
-		// MOCK DB Socios
-		List<Socio> items = new ArrayList<Socio>();
-		items.add(new Socio(0, "COCA-COLA", "AV.CABILDO 123", "4557-7788",
-				"coca@coca-cola.com"));
-		items.add(new Socio(1, "GOOGLE", "AV. BELGRANO 456", "4557-7711",
-				"google@gmail.com"));
-		socios = items;
 
 		this.deportes = deportes;
 		this.clases = clases;
@@ -43,40 +37,27 @@ public class AreaAdministracion {
 
 	public List<VistaSocio> obtenerSocios() {
 		List<VistaSocio> listaVistasSocios = new ArrayList<VistaSocio>();
-
-		for (Socio s : socios) {
+		for (Socio s : socios.getAllSocios()) {
 			listaVistasSocios.add(s.getView());
 		}
-
 		return listaVistasSocios;
-
 	}
 
 	public void eliminarSocio(int idSocio) {
-
-		Socio socio = null;
-		for (Socio item : socios) {
-			if (item.getidSocio() == idSocio) {
-				socio = item;
-				break;
-			}
-		}
-
-		socios.remove(socio);
-
+		socios.deleteSocio(idSocio);
 	}
 
 	public void agregarSocio(String nombre, String domicilio, String telefono,
 			String mail) {
-		socios.add(1, new Socio(nombre, domicilio, telefono, mail));
+		socios.addSocio(new Socio(nombre, domicilio, telefono, mail));
 	}
 
 	public void modificarSocio(int idSocio, String nombre, String domicilio,
-			String telefono, String mail) {
+			String telefono, String mail) throws Exception {
 		// TODO Auto-generated method stub
 		Socio s = null;
-		for (Socio currentSocio : socios) {
-			if (currentSocio.getidSocio() == idSocio) {
+		for (Socio currentSocio : socios.getAllSocios()) {
+			if (currentSocio.getIdSocio() == idSocio) {
 				s = currentSocio;
 				break;
 			}
@@ -85,6 +66,7 @@ public class AreaAdministracion {
 		s.setDomicilio(domicilio);
 		s.setTelefono(telefono);
 		s.setMail(mail);
+		socios.editSocio(idSocio, s);
 	}
 
 	public List<Deporte> obtenerDeportes() {
@@ -101,7 +83,7 @@ public class AreaAdministracion {
 
 		for (Deporte item : deportes) {
 			if (s.getId_deporte() == item.getId_deporte()) {
-				socios.remove(item);
+				//socios.remove(item);
 			}
 		}
 

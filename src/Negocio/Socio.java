@@ -37,10 +37,10 @@ public class Socio {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getidSocio() {
+	public int getIdSocio() {
 		return idSocio;
 	}
-	public void setidSocio(int idSocio) {
+	public void setIdSocio(int idSocio) {
 		this.idSocio = idSocio;
 	}
 	public String getNombre() {
