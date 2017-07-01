@@ -9,7 +9,7 @@ import Negocio.Abono;
 import Negocio.Clase;
 import Negocio.Deporte;
 import Negocio.Socio;
-import Vistas.VistaSocio;
+import ViewModels.VistaSocio;
 
 public class AreaAdministracion {
 

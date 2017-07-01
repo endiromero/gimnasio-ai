@@ -21,6 +21,7 @@ import javax.swing.SwingUtilities;
 
 import Controlador.AreaAdministracion;
 import Negocio.Socio;
+import ViewModels.VistaSocio;
 
 	public class FormSocio extends JFrame{
 		private JPanel pnlContenedor;

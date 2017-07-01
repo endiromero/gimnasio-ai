@@ -2,7 +2,7 @@ package Negocio;
 
 import java.util.Vector;
 
-import Vistas.VistaSocio;
+import ViewModels.VistaSocio;
 
 public class Socio {
 	

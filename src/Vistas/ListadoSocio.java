@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import Controlador.AreaAdministracion;
 import Excepciones.SocioException;
 import Negocio.Socio;
+import ViewModels.VistaSocio;
 
 	public class ListadoSocio extends JFrame {
 		private JPanel pnlContenedor;
@@ -36,7 +37,7 @@ import Negocio.Socio;
 		public ListadoSocio() {
 			this.listadoSocios = this;
 			// Establecer el titulo de la ventana
-			this.setTitle("Panel de Control");
+			this.setTitle("ABM de Socios");
 			// Establecer la dimension de la ventana (ancho, alto)
 			this.setSize(750, 400);
 			// Establecer NO dimensionable la ventana
@@ -73,8 +74,8 @@ import Negocio.Socio;
 					new FormSocio("Alta Socio", -1, ListadoSocio.this.listadoSocios);
 				}
 			});
-			gbc.gridx = 0; // número columna
-			gbc.gridy = 0; // número fila
+			gbc.gridx = 0; // nï¿½mero columna
+			gbc.gridy = 0; // nï¿½mero fila
 			gbc.gridwidth = 1; // numero de columnas de ancho
 			gbc.gridheight = 1; // numero de filas de ancho
 			gbc.weightx = 1.0;
@@ -123,7 +124,7 @@ import Negocio.Socio;
 				public void actionPerformed(ActionEvent e) {
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
-					FormSocio editWindow = new FormSocio("Edición Socio", id, ListadoSocio.this.listadoSocios);
+					FormSocio editWindow = new FormSocio("Ediciï¿½n Socio", id, ListadoSocio.this.listadoSocios);
 				}
 			};
 			buttonColumn = new ButtonColumn(tblItems, a, 5, "Editar");

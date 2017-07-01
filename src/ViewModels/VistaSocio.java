@@ -1,4 +1,4 @@
-package Vistas;
+package ViewModels;
 
 import java.util.Vector;
 
