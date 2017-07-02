@@ -2,13 +2,23 @@ package Negocio;
 
 import java.util.Vector;
 
+import ViewModels.VistaDeporte;
+
 public class Deporte {
 	
-	
-	private int id_deporte;
+	// Backing Fields
+	private int idDeporte;
 	private String titulo;
 	private String descripcion;
-	private Vector <Clase> clases;
+	private Vector<Clase> clases;
+	
+	// Constructors
+	public Deporte(int idDeporte, String titulo, String descripcion) {
+		super();
+		this.idDeporte = idDeporte;
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+	}
 	
 	public Deporte(String titulo, String descripcion) {
 		super();
@@ -20,24 +30,28 @@ public class Deporte {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getId_deporte() {
-		return id_deporte;
+	// Properties
+	public int getIdDeporte() {
+		return idDeporte;
 	}
-	public void setId_deporte(int id_deporte) {
-		this.id_deporte = id_deporte;
+	public void setIdDeporte(int idDeporte) {
+		this.idDeporte = idDeporte;
 	}
+	
 	public String getTitulo() {
 		return titulo;
 	}
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
+	
 	public String getDescripcion() {
 		return descripcion;
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
 	public Vector<Clase> getClases() {
 		return clases;
 	}
@@ -45,5 +59,9 @@ public class Deporte {
 		this.clases = clases;
 	}
 	
+	// View
+	public VistaDeporte getView(){
+		return new VistaDeporte(idDeporte, titulo, descripcion);
+	}
 
 }

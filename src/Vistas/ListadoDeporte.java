@@ -8,21 +8,20 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowStateListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
 
-	import javax.swing.*;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import Controlador.AreaAdministracion;
-import Negocio.Deporte;
-
-	//import controlador.ClienteControlador;
-	//import excepciones.ClienteException;
-
-	//import negocio.Cliente;
+import Excepciones.SocioException;
+import Negocio.Socio;
+import ViewModels.VistaDeporte;
+import ViewModels.VistaSocio;
 
 	public class ListadoDeporte extends JFrame {
 		private JPanel pnlContenedor;
@@ -32,12 +31,14 @@ import Negocio.Deporte;
 		private JLabel lblTitulo;
 		private ButtonColumn buttonColumn;
 		private JButton btnAlta;
-		private ListadoDeporte me;
+		private ListadoDeporte listadoDeportes;
+		
+		List<VistaDeporte> items;
 
 		public ListadoDeporte() {
-			this.me = this;
+			this.listadoDeportes = this;
 			// Establecer el titulo de la ventana
-			this.setTitle("Panel de Control");
+			this.setTitle("ABM de Deportes");
 			// Establecer la dimension de la ventana (ancho, alto)
 			this.setSize(750, 400);
 			// Establecer NO dimensionable la ventana
@@ -55,7 +56,7 @@ import Negocio.Deporte;
 			pnlInferior = new JPanel();
 			pnlContenedor.setLayout(new BorderLayout());
 
-			lblTitulo = new JLabel("Listado de Clientes");
+			lblTitulo = new JLabel("Listado de Deportes");
 			lblTitulo.setFont(new Font("Serif", Font.BOLD, 20));
 			lblTitulo.setHorizontalAlignment(JLabel.CENTER);
 
@@ -71,11 +72,11 @@ import Negocio.Deporte;
 			btnAlta = new JButton("Nuevo");
 			btnAlta.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new FormDeporte("Alta Socio", -1, ListadoDeporte.this.me);
+					new FormDeporte("Alta Deportes", -1, ListadoDeporte.this.listadoDeportes);
 				}
 			});
-			gbc.gridx = 0; // número columna
-			gbc.gridy = 0; // número fila
+			gbc.gridx = 0; // nï¿½mero columna
+			gbc.gridy = 0; // nï¿½mero fila
 			gbc.gridwidth = 1; // numero de columnas de ancho
 			gbc.gridheight = 1; // numero de filas de ancho
 			gbc.weightx = 1.0;
@@ -88,26 +89,28 @@ import Negocio.Deporte;
 
 		private JScrollPane getJTable() {
 			tblItems = new JTable();
-			fillTable("");
 			JScrollPane scrollPane = new JScrollPane(tblItems);
+			fillTable();
 			return scrollPane;
 		}
 
-		public void fillTable(String txt) {
+		public void fillTable() {
+			items = getItems();
 			Vector<String> aux;
-			String[] cabecera = { "Id", "Nombre", "Domicilio", "Telefono", "Mail",
+			String[] cabecera = { "Id", "Titulo", "Descripcion",
 					"", "" };
 
 			dataModel = new DefaultTableModel();
-			dataModel.setColumnCount(7);
+			dataModel.setColumnCount(5);
 			dataModel.setColumnIdentifiers(cabecera);
 			tblItems.setModel(dataModel);
 			tblItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-			List<Deporte> items = AreaAdministracion.getInstancia().obtenerDeportes();
-			for(Deporte item : items) {
+			
+			//List<Socio> items = AreaAdministracion.getInstancia().obtenerSocios();
+			for(VistaDeporte item : items) {
 				aux = new Vector<String>();
-				aux.add(Integer.toString(item.getId_deporte()));
+				aux.add(Integer.toString(item.getIdDeporte()));
 				aux.add(item.getTitulo());
 				aux.add(item.getDescripcion());
 				dataModel.addRow(aux);
@@ -120,39 +123,25 @@ import Negocio.Deporte;
 				public void actionPerformed(ActionEvent e) {
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
-					new FormDeporte("Edición Cliente", id, ListadoDeporte.this.me);
+					FormDeporte editWindow = new FormDeporte("Ediciï¿½n Deporte", id, ListadoDeporte.this.listadoDeportes);
 				}
 			};
-			buttonColumn = new ButtonColumn(tblItems, a, 5, "Editar");
+			buttonColumn = new ButtonColumn(tblItems, a, 3, "Editar");
 
 			a = new AbstractAction() {
 				public void actionPerformed(ActionEvent e) {
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
-					Deporte item = new Deporte();
-					item.setId_deporte(id);
-					//System.out.println(item.getIdCliente());
-				
-//					try {
-						AreaAdministracion.getInstancia().eliminarDeporte(item);
-						System.out.println("no se ha encontrado el id");
-//					} catch (ClienteException e1) {
-//						// TODO Auto-generated catch block
-//						JOptionPane.showMessageDialog(null, e1.getMessage());
-//					}
+					AreaAdministracion.getInstancia().eliminarDeporte(id);
+					ListadoDeporte.this.listadoDeportes.fillTable();
 				}
 			};
-			buttonColumn = new ButtonColumn(tblItems, a, 6, "Eliminar");
+			buttonColumn = new ButtonColumn(tblItems, a, 4, "Eliminar");
 		}
 
-//		private List<Cliente> getItems() {
-//			List<Cliente> items = new ArrayList<Cliente>();
-//			items.add(new Cliente(1, "COCA-COLA", "AV.CABILDO 123", "4557-7788",
-//					"coca@coca-cola.com"));
-//			items.add(new Cliente(2, "GOOGLE", "AV. BELGRANO 456", "4557-7711",
-//					"google@gmail.com"));
-//			return items;
-//		}
+		private List<VistaDeporte> getItems() {
+			return AreaAdministracion.getInstancia().obtenerDeportes();
+		}
 	}
 
 
