@@ -1,5 +1,6 @@
 package Negocio;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Abono {
@@ -7,9 +8,9 @@ public class Abono {
 	private int codigo;
 	private String nombre;
 	private float precio;
-	private Date periodoVigencia;
+	private Timestamp periodoVigencia;
 	
-	public Abono(String nombre, float precio, Date periodoVigencia) {
+	public Abono(String nombre, float precio, Timestamp periodoVigencia) {
 		super();
 		this.nombre = nombre;
 		this.precio = precio;
@@ -40,11 +41,11 @@ public class Abono {
 		this.precio = precio;
 	}
 
-	public Date getPeriodoVigencia() {
+	public Timestamp getPeriodoVigencia() {
 		return periodoVigencia;
 	}
 
-	public void setPeriodoVigencia(Date periodoVigencia) {
+	public void setPeriodoVigencia(Timestamp periodoVigencia) {
 		this.periodoVigencia = periodoVigencia;
 	}
 	

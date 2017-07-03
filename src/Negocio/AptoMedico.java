@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class AptoMedico {
 	
+	private int codigo;
 	private Date fechaCertificado;
 	private Date fechaCaducidad;
 	private String profesional;
@@ -40,6 +41,10 @@ public class AptoMedico {
 	}
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
+	}
+	public int getCodigo() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

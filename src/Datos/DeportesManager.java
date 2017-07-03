@@ -3,7 +3,6 @@ package Datos;
 import java.util.List;
 
 import Negocio.Deporte;
-import Negocio.Socio;
 
 public interface DeportesManager {
 	
