@@ -2,11 +2,16 @@
 package Vistas;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -16,7 +21,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.text.html.HTMLDocument.Iterator;
 
+import Controlador.AreaAdministracion;
 import Vistas.ListadoEmpleado;
 
 public class PanelDeControl extends JFrame {
@@ -161,8 +168,25 @@ public class PanelDeControl extends JFrame {
 			JMenuItem mailMasivoNovedades = new JMenuItem(
 					"Mail Masivo de Novedades");
 			mailMasivoNovedades.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					System.out.println("Listado Mails Masivos de Novedades");
+				public void actionPerformed(ActionEvent e) {				
+					
+					List<String> emails = AreaAdministracion.getInstancia().obtenerEmailSocios();
+					String URI = "mailto:";
+					String mailto = "";
+					List<String> to = new LinkedList<>();
+					
+					for (String object: emails) {							
+						to = emails;						
+						mailto = String.join(";", to);						
+					}			 
+					
+					try {
+						Desktop.getDesktop().mail(new URI(URI+mailto));
+					} catch (IOException e1) {						
+						e1.printStackTrace();
+					} catch (URISyntaxException e1) {						
+						e1.printStackTrace();
+					}
 				}
 			});
 

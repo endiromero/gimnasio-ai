@@ -137,4 +137,9 @@ public class AreaAdministracion {
 		deportes.deleteDeporte(idDeporte);
 	}
 
+	public List<String> obtenerEmailSocios() {
+		return socios.getAllSociosEmails();		
+		
+	}
+
 }

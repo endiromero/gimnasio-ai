@@ -6,7 +6,7 @@ import Negocio.Socio;
 
 public interface SociosManager {	
 
-	List<Socio> getAllSocios();
+	
 	
 	void addSocio(Socio newSocio);
 	
@@ -14,5 +14,8 @@ public interface SociosManager {
 	
 	void deleteSocio(int idSocio);
 
-
+	List<Socio> getAllSocios();
+	
+	List<String> getAllSociosEmails();	
+	
 }

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
@@ -145,6 +146,31 @@ public class DefaultSociosManager implements SociosManager{
 			System.out.println();
 		}
 		
+		
+	}
+
+	
+	public List<String>  getAllSociosEmails() {
+		try
+		{			
+			List<String> emails = new ArrayList<>();
+							
+			Connection c = PoolConnection.getPoolConnection().getConnection();
+			Statement s = c.createStatement();
+			ResultSet result = s.executeQuery("SELECT [Email] FROM [ADMGym].[dbo].[Socio]");
+			while (result.next())
+			{
+				String mail = result.getString(1);				
+				emails.add(mail);			
+			}
+			PoolConnection.getPoolConnection().realeaseConnection(c);
+			return emails;
+		}
+		catch(Exception e)
+		{
+			
+		}
+		return null;
 		
 	}
 
