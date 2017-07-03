@@ -85,7 +85,7 @@ import ViewModels.VistaSocio;
 			if(this.id == -1) 
 				lblTitulo = new JLabel("Alta Cliente");
 			else
-				lblTitulo = new JLabel("Edici�n Cliente");
+				lblTitulo = new JLabel("Editar Socio");
 			lblTitulo.setFont(new Font("Serif", Font.BOLD, 20));
 			lblTitulo.setHorizontalAlignment(JLabel.CENTER);
 			pnlContenedor.add(lblTitulo, BorderLayout.PAGE_START);
@@ -129,7 +129,7 @@ import ViewModels.VistaSocio;
 			gbc.weightx = 0.9;
 			pnlCentro.add(txtDomicilio, gbc); // agregar el textField al panel contenedor
 
-			lblTelefono = new JLabel("Tel�fono:");
+			lblTelefono = new JLabel("Telefono:");
 			lblTelefono.setHorizontalAlignment(JLabel.RIGHT);
 			gbc.gridx = 0; // n�mero columna
 			gbc.gridy = 2; // n�mero fila

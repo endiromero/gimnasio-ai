@@ -21,7 +21,8 @@ public class AreaAdministracion {
 	}
 	
 	// CUANDO TENGAMOS EL MANAGER QUE LE PEGUE A LA DB, CAMBIAR EL DE TEST POR ESE NUEVO.
-	private SociosManager socios = TestSociosManager.getInstance();
+	//private SociosManager socios = TestSociosManager.getInstance();
+	private SociosManager socios = DefaultSociosManager.getInstance();
 	private EmpleadosManager empleados = TestEmpleadosManager.getInstance();
 	private DeportesManager deportes = TestDeportesManager.getInstance();
 	private List<Clase> clases;
@@ -38,6 +39,7 @@ public class AreaAdministracion {
 	public void agregarSocio(String nombre, String domicilio, String telefono,
 			String mail) {
 		socios.addSocio(new Socio(nombre, domicilio, telefono, mail));
+		
 	}
 	
 	public List<VistaSocio> obtenerSocios() {
@@ -45,7 +47,7 @@ public class AreaAdministracion {
 		for (Socio s : socios.getAllSocios()) {
 			listaVistasSocios.add(s.getView());
 		}
-		return listaVistasSocios;
+		return listaVistasSocios;		
 	}
 
 	public void modificarSocio(int idSocio, String nombre, String domicilio,
@@ -62,7 +64,7 @@ public class AreaAdministracion {
 		s.setDomicilio(domicilio);
 		s.setTelefono(telefono);
 		s.setMail(mail);
-		socios.editSocio(idSocio, s);
+		socios.editSocio(idSocio, s); 
 	}
 
 	public void eliminarSocio(int idSocio) {

@@ -124,7 +124,7 @@ import ViewModels.VistaSocio;
 				public void actionPerformed(ActionEvent e) {
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
-					FormSocio editWindow = new FormSocio("Edici�n Socio", id, ListadoSocio.this.listadoSocios);
+					FormSocio editWindow = new FormSocio("Editar Socio", id, ListadoSocio.this.listadoSocios);
 				}
 			};
 			buttonColumn = new ButtonColumn(tblItems, a, 5, "Editar");

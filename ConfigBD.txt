@@ -1,0 +1,5 @@
+jdbc=jdbc:sqlserver://
+servidor=AR2150621W2;
+database=ADMGym;
+integratedSecurity=true;
+conexiones=3
