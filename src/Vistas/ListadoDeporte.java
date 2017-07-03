@@ -123,7 +123,7 @@ import ViewModels.VistaSocio;
 				public void actionPerformed(ActionEvent e) {
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
-					FormDeporte editWindow = new FormDeporte("Edici�n Deporte", id, ListadoDeporte.this.listadoDeportes);
+					FormDeporte editWindow = new FormDeporte("Edicion Deporte", id, ListadoDeporte.this.listadoDeportes);
 				}
 			};
 			buttonColumn = new ButtonColumn(tblItems, a, 3, "Editar");
