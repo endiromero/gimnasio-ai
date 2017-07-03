@@ -80,7 +80,7 @@ import ViewModels.VistaSocio;
 			if(this.id == -1) 
 				lblTitulo = new JLabel("Alta Deporte");
 			else
-				lblTitulo = new JLabel("Edici�n Deporte");
+				lblTitulo = new JLabel("Edicion Deporte");
 			lblTitulo.setFont(new Font("Serif", Font.BOLD, 20));
 			lblTitulo.setHorizontalAlignment(JLabel.CENTER);
 			pnlContenedor.add(lblTitulo, BorderLayout.PAGE_START);
@@ -93,7 +93,7 @@ import ViewModels.VistaSocio;
 			pnlCentro.setLayout(new GridBagLayout());
 			GridBagConstraints gbc = new GridBagConstraints();
 
-			lblTituloDeporte = new JLabel("Título:");
+			lblTituloDeporte = new JLabel("Titulo:");
 			lblTituloDeporte.setHorizontalAlignment(JLabel.RIGHT);
 			gbc.gridx = 0; // n�mero columna
 			gbc.gridy = 0; // n�mero fila
@@ -111,7 +111,7 @@ import ViewModels.VistaSocio;
 			gbc.weightx = 0.9;
 			pnlCentro.add(txtTituloDeporte, gbc); // agregar el textField al panel contenedor
 
-			lblDescripcion = new JLabel("Descripción:");
+			lblDescripcion = new JLabel("Descripcion:");
 			lblDescripcion.setHorizontalAlignment(JLabel.RIGHT);
 			gbc.gridx = 0; // n�mero columna
 			gbc.gridy = 1; // n�mero fila
@@ -129,14 +129,14 @@ import ViewModels.VistaSocio;
 				public void actionPerformed(ActionEvent e) {
 					if(txtTituloDeporte.getText().equals("")) {
 						JOptionPane.showMessageDialog(null,
-								"Por favor ingrese el título");
+								"Por favor ingrese el titulo");
 						txtTituloDeporte.requestFocusInWindow();
 						return;
 					}
 
 					if(txtDescripcion.getText().equals("")) {
 						JOptionPane.showMessageDialog(null,
-								"Por favor ingrese la descripción");
+								"Por favor ingrese la descripcion");
 						txtDescripcion.requestFocusInWindow();
 						return;
 					}
