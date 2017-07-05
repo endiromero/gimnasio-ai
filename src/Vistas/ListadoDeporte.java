@@ -97,7 +97,7 @@ import ViewModels.VistaSocio;
 		public void fillTable() {
 			items = getItems();
 			Vector<String> aux;
-			String[] cabecera = { "Id", "Titulo", "Descripcion",
+			String[] cabecera = { "Código", "Titulo", "Descripcion",
 					"", "" };
 
 			dataModel = new DefaultTableModel();
