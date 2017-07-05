@@ -35,7 +35,7 @@ public class Socio {
 	}
 	
 	public Socio() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	// Properties

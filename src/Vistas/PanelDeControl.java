@@ -131,7 +131,7 @@ public class PanelDeControl extends JFrame {
 			JMenuItem listadoClases = new JMenuItem("Clases");
 			listadoClases.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("Listado Clases");
+					new ListadoClase();
 				}
 			});
 

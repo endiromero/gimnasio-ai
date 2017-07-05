@@ -85,4 +85,15 @@ public class TestSociosManager implements SociosManager {
 		sociosBackingList.remove(s);
 	}
 
+	@Override
+	public List<String> getAllSociosEmails() {
+		List<String> result = new ArrayList<String>();
+		for (Socio currentSocio : sociosBackingList) {
+			result.add(
+				currentSocio.getMail()
+			);
+		}
+		return result;
+	}
+
 }

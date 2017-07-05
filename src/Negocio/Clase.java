@@ -2,43 +2,57 @@ package Negocio;
 
 import java.util.Date;
 
+import ViewModels.VistaClase;
+
 public class Clase {
 
-	
+	// Backing fields
 	private int codigo;
-	private Date dia;
-	private Date horario;
+	private Date fecha;
 	private Profesor profesor;
 	
-	
-	public Clase(Date dia, Date horario) {
+	// Constructors
+	public Clase(int codigo, Date fecha) {
 		super();
-		this.dia = dia;
-		this.horario = horario;
+		this.codigo = codigo;
+		this.fecha = fecha;
 	}
+	
+	public Clase(Date fecha) {
+		super();
+		this.fecha = fecha;
+	}
+	
+	public Clase() {
+		super();
+	}
+	
+	
+	// Properties
 	public int getCodigo() {
 		return codigo;
 	}
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-	public Date getDia() {
-		return dia;
+	
+	public Date getFecha() {
+		return fecha;
 	}
-	public void setDia(Date dia) {
-		this.dia = dia;
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
-	public Date getHorario() {
-		return horario;
-	}
-	public void setHorario(Date horario) {
-		this.horario = horario;
-	}
+	
 	public Profesor getProfesor() {
 		return profesor;
 	}
 	public void setProfesor(Profesor profesor) {
 		this.profesor = profesor;
+	}
+
+	// View
+	public VistaClase getView(){
+		return new VistaClase(codigo, fecha);
 	}
 	
 	
