@@ -21,8 +21,10 @@ import Controlador.AreaAdministracion;
 import Excepciones.SocioException;
 import Negocio.Socio;
 import ViewModels.VistaSocio;
+import Vistas.FormSocio;
 
 	public class ListadoSocio extends JFrame {
+		
 		private JPanel pnlContenedor;
 		private JPanel pnlInferior;
 		private JTable tblItems;
@@ -124,7 +126,8 @@ import ViewModels.VistaSocio;
 				public void actionPerformed(ActionEvent e) {
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
-					FormSocio editWindow = new FormSocio("Editar Socio", id, ListadoSocio.this.listadoSocios);
+					FormSocio editWindow = new FormSocio ("Editar Socio", id, ListadoSocio.this.listadoSocios);
+					
 				}
 			};
 			buttonColumn = new ButtonColumn(tblItems, a, 5, "Editar");
