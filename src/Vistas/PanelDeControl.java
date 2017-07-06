@@ -138,7 +138,7 @@ public class PanelDeControl extends JFrame {
 			JMenuItem listadoAbono = new JMenuItem("Abono");
 			listadoAbono.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("Listado Abono");
+					new ListadoAbono();
 				}
 			});
 

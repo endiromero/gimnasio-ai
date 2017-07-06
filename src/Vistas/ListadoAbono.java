@@ -9,8 +9,10 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowStateListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -110,10 +112,13 @@ import ViewModels.VistaSocio;
 			//List<Socio> items = AreaAdministracion.getInstancia().obtenerSocios();
 			for(VistaAbono item : items) {
 				aux = new Vector<String>();
-				aux.add(Integer.toString(item.get;
+				aux.add(Integer.toString(item.getIdAbono()));
 				aux.add(item.getNombre());
-				aux.add(item.getPrecio());
-				aux.add(item.getVigencia());
+				aux.add(Float.toString(item.getPrecio()));
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Date fecha = new Date();
+				String fechaCadena = sdf.format(item.getVigencia());
+				aux.add(fechaCadena);
 				
 				dataModel.addRow(aux);
 			}
