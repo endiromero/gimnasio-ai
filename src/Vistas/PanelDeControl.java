@@ -203,7 +203,7 @@ public class PanelDeControl extends JFrame {
 					"Cronograma");
 			cronograma.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("Listado Cronograma");
+					new Cronograma();
 				}
 			});
 
