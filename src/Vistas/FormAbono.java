@@ -21,6 +21,7 @@ import javax.swing.SwingUtilities;
 
 import Controlador.AreaAdministracion;
 import Negocio.Socio;
+import ViewModels.VistaAbono;
 import ViewModels.VistaSocio;
 
 	public class FormAbono extends JFrame{
@@ -29,21 +30,19 @@ import ViewModels.VistaSocio;
 		private JButton btnGuardar;
 		private JLabel lblTitulo;
 		private JLabel lblNombre;
-		private JLabel lblDomicilio;
-		private JLabel lblTelefono;
-		private JLabel lblMail;
+		private JLabel lblPrecio;
+		private JLabel lblVigencia;
 		private JTextField txtNombre;
-		VistaSocio entidad;
-		private JTextField txtDomicilio;
-		private JTextField txtTelefono;
-		private JTextField txtMail;
+		VistaAbono entidad;
+		private JTextField txtPrecio;
+		private JTextField txtVigencia;
 		private int id;
-		private ListadoSocio lst;
+		private ListadoAbono lst;
 		FormAbono that = this;
 
-		public FormAbono(String frameTitle, int idSocio, ListadoSocio lst) {
-			this.id = idSocio;
-			this.lst = lst;
+		public FormAbono(String frameTitle, int idAbono, ListadoAbono listadoAbono) {
+			this.id = idAbono;
+			this.lst = listadoAbono;
 			this.entidad = null;
 			
 			// Establecer el titulo de la ventana
@@ -57,11 +56,11 @@ import ViewModels.VistaSocio;
 			// Agregar el panel al JFrame
 			this.getContentPane().add(this.getPanelContenedor());
 			
-			if(idSocio != -1){
-				VistaSocio socioAEditar = null;
-				for(VistaSocio currentVistaSocio: lst.items){
-					if(currentVistaSocio.getIdSocio() == id){
-						this.entidad = currentVistaSocio;
+			if(idAbono != -1){
+				VistaAbono abonoAEditar = null;
+				for(VistaAbono currentVistaAbono: listadoAbono.items){
+					if(currentVistaAbono.getIdAbono() == id){
+						this.entidad = currentVistaAbono;
 						break;
 					}
 				}

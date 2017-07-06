@@ -56,7 +56,7 @@ import ViewModels.VistaSocio;
 			pnlInferior = new JPanel();
 			pnlContenedor.setLayout(new BorderLayout());
 
-			lblTitulo = new JLabel("Listado de Socios");
+			lblTitulo = new JLabel("Listado de Abono");
 			lblTitulo.setFont(new Font("Serif", Font.BOLD, 20));
 			lblTitulo.setHorizontalAlignment(JLabel.CENTER);
 
@@ -72,7 +72,7 @@ import ViewModels.VistaSocio;
 			btnAlta = new JButton("Nuevo");
 			btnAlta.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new FormSocio("Alta Abono", -1, ListadoAbono.this.listadoAbono);
+					new FormAbono("Alta Abono", -1, ListadoAbono.this.listadoAbono);
 				}
 			});
 			gbc.gridx = 0; // n�mero columna
@@ -108,13 +108,13 @@ import ViewModels.VistaSocio;
 
 			
 			//List<Socio> items = AreaAdministracion.getInstancia().obtenerSocios();
-			for(VistaSocio item : items) {
+			for(VistaAbono item : items) {
 				aux = new Vector<String>();
-				aux.add(Integer.toString(item.getIdSocio()));
+				aux.add(Integer.toString(item.get;
 				aux.add(item.getNombre());
-				aux.add(item.getDomicilio());
-				aux.add(item.getTelefono());
-				aux.add(item.getMail());
+				aux.add(item.getPrecio());
+				aux.add(item.getVigencia());
+				
 				dataModel.addRow(aux);
 			}
 
@@ -125,7 +125,7 @@ import ViewModels.VistaSocio;
 				public void actionPerformed(ActionEvent e) {
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
-					FormAbono editWindow = new FormSocio("Editar Abono", id, ListadoAbono.this.listadoAbonos);
+					FormAbono editWindow = new FormAbono("Editar Abono", id, ListadoAbono.this.listadoAbono);
 				}
 			};
 			buttonColumn = new ButtonColumn(tblItems, a, 5, "Editar");
@@ -135,7 +135,7 @@ import ViewModels.VistaSocio;
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
 					AreaAdministracion.getInstancia().eliminarSocio(id);
-					ListadoAbono.this.listadoAbonos.fillTable("");
+					ListadoAbono.this.listadoAbono.fillTable("");
 				}
 			};
 			buttonColumn = new ButtonColumn(tblItems, a, 6, "Eliminar");
