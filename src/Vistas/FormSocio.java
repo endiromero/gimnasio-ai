@@ -33,7 +33,7 @@ import ViewModels.VistaSocio;
 		private JLabel lblTelefono;
 		private JLabel lblMail;
 		private JTextField txtNombre;
-		VistaSocio entidad;
+		VistaAbono entidad;
 		private JTextField txtDomicilio;
 		private JTextField txtTelefono;
 		private JTextField txtMail;
@@ -41,7 +41,7 @@ import ViewModels.VistaSocio;
 		private ListadoSocio lst;
 		FormSocio that = this;
 
-		public FormSocio(String frameTitle, int idSocio, ListadoSocio lst) {
+		public FormSocio(String frameTitle, int idSocio, ListadoAbono lst) {
 			this.id = idSocio;
 			this.lst = lst;
 			this.entidad = null;
@@ -211,7 +211,7 @@ import ViewModels.VistaSocio;
 
 		private void closeWin() {
 			this.setVisible(false);
-			lst.fillTable();
+			lst.fillTable("");
 			this.dispose();
 		}
 	}

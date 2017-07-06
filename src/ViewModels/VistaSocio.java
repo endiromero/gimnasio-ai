@@ -21,6 +21,9 @@ public class VistaSocio {
 		this.telefono = telefono;
 		this.mail = mail;
 	}
+	public VistaSocio (){
+		
+	}
 
 	public int getIdSocio() {
 		return idSocio;
@@ -40,6 +43,21 @@ public class VistaSocio {
 
 	public String getMail() {
 		return mail;
+	}
+	public void setIdSocio(int idSocio) {
+		this.idSocio = idSocio;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public void setDomicilio(String domicilio) {
+		this.domicilio = domicilio;
+	}
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 }

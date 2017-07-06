@@ -20,9 +20,10 @@ import javax.swing.table.DefaultTableModel;
 import Controlador.AreaAdministracion;
 import Excepciones.SocioException;
 import Negocio.Socio;
+import ViewModels.VistaAbono;
 import ViewModels.VistaSocio;
 
-	public class ListadoSocio extends JFrame {
+	public class ListadoAbono extends JFrame {
 		private JPanel pnlContenedor;
 		private JPanel pnlInferior;
 		private JTable tblItems;
@@ -30,14 +31,14 @@ import ViewModels.VistaSocio;
 		private JLabel lblTitulo;
 		private ButtonColumn buttonColumn;
 		private JButton btnAlta;
-		private ListadoSocio listadoSocios;
+		private ListadoAbono listadoAbono;
 		
-		List<VistaSocio> items;
+		List<VistaAbono> items;
 
-		public ListadoSocio() {
-			this.listadoSocios = this;
+		public ListadoAbono() {
+			this.listadoAbono = this;
 			// Establecer el titulo de la ventana
-			this.setTitle("ABM de Socios");
+			this.setTitle("ABM de Abono");
 			// Establecer la dimension de la ventana (ancho, alto)
 			this.setSize(750, 400);
 			// Establecer NO dimensionable la ventana
@@ -71,7 +72,7 @@ import ViewModels.VistaSocio;
 			btnAlta = new JButton("Nuevo");
 			btnAlta.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new FormSocio("Alta Socio", -1, ListadoSocio.this.listadoSocios);
+					new FormSocio("Alta Abono", -1, ListadoAbono.this.listadoAbono);
 				}
 			});
 			gbc.gridx = 0; // n�mero columna
@@ -96,7 +97,7 @@ import ViewModels.VistaSocio;
 		public void fillTable(String txt) {
 			items = getItems();
 			Vector<String> aux;
-			String[] cabecera = { "Id", "Nombre", "Domicilio", "Telefono", "Mail",
+			String[] cabecera = { "Id", "Nombre", "Precio", "Vigencia",
 					"", "" };
 
 			dataModel = new DefaultTableModel();
@@ -124,7 +125,7 @@ import ViewModels.VistaSocio;
 				public void actionPerformed(ActionEvent e) {
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
-					FormSocio editWindow = new FormSocio("Editar Socio", id, ListadoSocio.this.listadoSocios);
+					FormAbono editWindow = new FormSocio("Editar Abono", id, ListadoAbono.this.listadoAbonos);
 				}
 			};
 			buttonColumn = new ButtonColumn(tblItems, a, 5, "Editar");
@@ -134,14 +135,14 @@ import ViewModels.VistaSocio;
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
 					AreaAdministracion.getInstancia().eliminarSocio(id);
-					ListadoSocio.this.listadoSocios.fillTable("");
+					ListadoAbono.this.listadoAbonos.fillTable("");
 				}
 			};
 			buttonColumn = new ButtonColumn(tblItems, a, 6, "Eliminar");
 		}
 
-		private List<VistaSocio> getItems() {
-			return AreaAdministracion.getInstancia().obtenerSocios();
+		private List<VistaAbono> getItems() {
+			return AreaAdministracion.getInstancia().obtenerAbono();
 		}
 	}
 

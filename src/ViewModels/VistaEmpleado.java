@@ -12,14 +12,14 @@ public class VistaEmpleado {
 	private String nombre;
 	private String telefono;
 	private String mail;
-	private String puesto;
+	private String tipo;
 	
-	public VistaEmpleado (int codigo, String nombre, String telefono, String mail, String puesto){
+	public VistaEmpleado (int codigo, String nombre, String telefono, String mail, String tipo){
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.mail = mail;
-		this.puesto = puesto;
+		this.tipo = tipo;
 	}
 
 	public int getCodigo() {
@@ -39,7 +39,7 @@ public class VistaEmpleado {
 	}
 	
 	public String getPuesto() {
-		return puesto;
+		return tipo;
 	}
 
 }

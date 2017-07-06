@@ -56,7 +56,7 @@ import ViewModels.VistaSocio;
 			pnlInferior = new JPanel();
 			pnlContenedor.setLayout(new BorderLayout());
 
-			lblTitulo = new JLabel("Listado de Socios");
+			lblTitulo = new JLabel("Listado de Empleados");
 			lblTitulo.setFont(new Font("Serif", Font.BOLD, 20));
 			lblTitulo.setHorizontalAlignment(JLabel.CENTER);
 
@@ -90,14 +90,14 @@ import ViewModels.VistaSocio;
 		private JScrollPane getJTable() {
 			tblItems = new JTable();
 			JScrollPane scrollPane = new JScrollPane(tblItems);
-			fillTable();
+			fillTable("");
 			return scrollPane;
 		}
 
-		public void fillTable() {
+		public void fillTable(String txt) {
 			items = getItems();
 			Vector<String> aux;
-			String[] cabecera = { "Codigo", "Nombre", "Telefono", "Mail", "Puesto",
+			String[] cabecera = { "Codigo", "Nombre", "Telefono", "Mail", "Tipo",
 					"", "" };
 
 			dataModel = new DefaultTableModel();
@@ -125,7 +125,7 @@ import ViewModels.VistaSocio;
 				public void actionPerformed(ActionEvent e) {
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
-					FormEmpleado editWindow = new FormEmpleado("Edici�n Empleado", id, ListadoEmpleado.this.listadoEmpleados);
+					FormEmpleado editWindow = new FormEmpleado("Edicion Empleado", id, ListadoEmpleado.this.listadoEmpleados);
 				}
 			};
 			buttonColumn = new ButtonColumn(tblItems, a, 5, "Editar");
@@ -135,7 +135,7 @@ import ViewModels.VistaSocio;
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
 					AreaAdministracion.getInstancia().eliminarEmpleado(id);
-					ListadoEmpleado.this.listadoEmpleados.fillTable();
+					ListadoEmpleado.this.listadoEmpleados.fillTable("");
 				}
 			};
 			buttonColumn = new ButtonColumn(tblItems, a, 6, "Eliminar");

@@ -1,21 +1,196 @@
 package Datos;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Vector;
 
+import Negocio.Abono;
 import Negocio.Socio;
 
-public interface SociosManager {	
+public class SociosManager {
+	
+	private static SociosManager instance = new SociosManager();	
+	
+	public static SociosManager getInstance() {
+		return instance;
+	}
+	
+	public List<Socio> getAllSocios() {
+			
+			Vector <Socio>rta = new Vector<Socio>();
+			PoolConnection.getPoolConnection();
+			Connection c;
+			try {
+				c = PoolConnection.getConnection();
+				Statement s = c.createStatement();
+				ResultSet result = s.executeQuery("SELECT [SocioID], [Nombre],[Domicilio],[Telefono],[Email] FROM [ADMGym].[dbo].[Socio]");
+				while (result.next())
+				{
+					int idSocio = result.getInt(1);
+					String nombre = result.getString(2);
+					String domicilio = result.getString(3);
+					String telefono = result.getString(4);
+					String mail = result.getString(5);
+					Socio socio = new Socio(idSocio, nombre, domicilio, telefono, mail);
+				    rta.add(socio);
+				}
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+						
+			//PoolConnection.getPoolConnection().realeaseConnection(c);
+			return rta;
+		}
+	
+	
+	
+	public void addSocio(Socio newSocio) {
+				
+		Connection con;
+			try {
+				con = PoolConnection.getPoolConnection().getConnection();
+				PreparedStatement s;
+				PreparedStatement a;
+				String SQL_INSERT_SOCIO;
+				String SQL_INSERT_ABONO;
+				
+				
+					SQL_INSERT_SOCIO = "INSERT INTO [Socio] ([Nombre],[Domicilio],[Telefono],[Email]) VALUES (?,?,?,?)";
+					s = con.prepareStatement(SQL_INSERT_SOCIO, Statement.RETURN_GENERATED_KEYS);
+					s.setString(1, newSocio.getNombre());
+					s.setString(2, newSocio.getDomicilio());
+					s.setString(3, newSocio.getTelefono());
+					s.setString(4, newSocio.getMail());			
+										
+					int affectedRows = s.executeUpdate();
+				    if (affectedRows == 0) {
+				            throw new SQLException("La creación del Socio ha fallado, ningun dato ha sido modificado.");
+				    }
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		
+		
+		    
+		    /*try (ResultSet generatedKeys = s.getGeneratedKeys()) {
+	            if (generatedKeys.next()) {
+	            	
+	            	//Podiamos agregar un combo con los nombres de los abonos y otro para los precios asociados.//
+	            		              
+	            	Abono abono = new Abono(newAbono.getNombre(), newAbono.getPrecio(), newAbono.getVigenciaDesde(), newAbono.getVigenciaHasta());
+	            	SQL_INSERT_ABONO = "INSERT INTO [dbo].[Abono] ([Nombre],[Precio], [VigenciaDesde],, [VigenciaHasta], [SocioID]) VALUES (?,?,?,?,?)";
+	            	a = con.prepareStatement(SQL_INSERT_ABONO);
+	     			a.setString(1, abono.getNombre());
+	     			a.setFloat(2, abono.getPrecio());
+	     			a.setTimestamp(3, abono.getVigenciaDesde());
+	     			a.setTimestamp(4, abono.getVigenciaHasta());
+	     			a.setInt(5, generatedKeys.getInt(1));		
+	     			a.execute();
+	            }
+	            else {
+	                throw new SQLException("La creación del Abono ha fallado.");
+	            }
+	        }		
+		*/
+			
+		
+		//PoolConnection.getPoolConnection().realeaseConnection(con);
+			
+	}
+	
+	public void editSocio(int idSocio, Socio modifiedSocio) throws Exception {
+		
+		String SQL_UPDATE_SOCIO;
+		Socio a = (Socio)modifiedSocio;
+		
+		SQL_UPDATE_SOCIO = "UPDATE [Socio] SET [Nombre] = ?,[Domicilio] = ?,[Telefono] = ?,[Email] = ? WHERE [SocioID]=?";
+		PoolConnection.getPoolConnection();
+		Connection con = PoolConnection.getConnection();
+		
+		PreparedStatement s = con.prepareStatement(SQL_UPDATE_SOCIO);	  		
+		s.setString(1, a.getNombre());
+		s.setString(2, a.getDomicilio());
+		s.setString(3, a.getTelefono());		
+		s.setString(4, a.getMail());
+		s.setInt(5, idSocio);
+				
+		s.execute();
+		//PoolConnection.getPoolConnection().realeaseConnection(con);
+		
+	}
+	
+	public void deleteSocio(int idSocio) {
+
+			Connection con;
+			try {
+				con = PoolConnection.getPoolConnection().getConnection();
+				PreparedStatement a = con.prepareStatement("DELETE FROM [ADMGym].[dbo].[AptoMedico] WHERE [SocioID] = ?");
+				a.setInt(1, idSocio);
+				a.execute();
+				
+				PreparedStatement b = con.prepareStatement("DELETE FROM [ADMGym].[dbo].[Abono] WHERE [SocioID] = ?");
+				b.setInt(1, idSocio);
+				b.execute();
+				
+				PreparedStatement c = con.prepareStatement("DELETE FROM [ADMGym].[dbo].[Inscripciones] WHERE [SocioID] = ?");
+				c.setInt(1, idSocio);
+				c.execute();
+				
+				PreparedStatement d = con.prepareStatement("DELETE FROM [ADMGym].[dbo].[Socio] WHERE [SocioID] = ?");
+				d.setInt(1, idSocio);
+				d.execute();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			//PoolConnection.getPoolConnection().realeaseConnection(con);
+		
+	}
 
 	
-	
-	void addSocio(Socio newSocio);
-	
-	void editSocio(int idSocio, Socio modifiedSocio) throws Exception;
-	
-	void deleteSocio(int idSocio);
+	public List<String>  getAllSociosEmails() {
+		try
+		{			
+			List<String> emails = new ArrayList<>();
+							
+			PoolConnection.getPoolConnection();
+			Connection c = PoolConnection.getConnection();
+			Statement s = c.createStatement();
+			ResultSet result = s.executeQuery("SELECT [Email] FROM [ADMGym].[dbo].[Socio]");
+			while (result.next())
+			{
+				String mail = result.getString(1);				
+				emails.add(mail);			
+			}
+			//PoolConnection.getPoolConnection().realeaseConnection(c);
+			return emails;
+		}
+		catch(Exception e)
+		{
+			
+		}
+		return null;
+		
+	}
 
-	List<Socio> getAllSocios();
-	
-	List<String> getAllSociosEmails();	
-	
 }

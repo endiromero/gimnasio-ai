@@ -8,13 +8,14 @@ public class Abono {
 	private int codigo;
 	private String nombre;
 	private float precio;
-	private Timestamp periodoVigencia;
+	private Date Vigencia;
 	
-	public Abono(String nombre, float precio, Timestamp periodoVigencia) {
+	public Abono(String nombre, float precio, Date Vigencia) {
 		super();
 		this.nombre = nombre;
 		this.precio = precio;
-		this.periodoVigencia = periodoVigencia;
+		this.Vigencia = Vigencia;
+
 	}
 
 	public int getCodigo() {
@@ -41,15 +42,12 @@ public class Abono {
 		this.precio = precio;
 	}
 
-	public Timestamp getPeriodoVigencia() {
-		return periodoVigencia;
+	public Date getVigencia() {
+		return Vigencia;
 	}
 
-	public void setPeriodoVigencia(Timestamp periodoVigencia) {
-		this.periodoVigencia = periodoVigencia;
+	public void setVigenciaDesde(Date Vigencia) {
+		this.Vigencia = Vigencia;
 	}
 	
-	
-	
-
 }

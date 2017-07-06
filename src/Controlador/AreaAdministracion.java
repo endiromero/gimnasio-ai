@@ -1,9 +1,13 @@
 package Controlador;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import Datos.*;
+import Excepciones.EmpleadoException;
+import Excepciones.SocioException;
 import Negocio.*;
 import ViewModels.*;
 
@@ -20,55 +24,67 @@ public class AreaAdministracion {
 		return instance;
 	}
 	
-	// CUANDO TENGAMOS EL MANAGER QUE LE PEGUE A LA DB, CAMBIAR EL DE TEST POR ESE NUEVO.
-	//private SociosManager socios = TestSociosManager.getInstance();
-	private SociosManager socios = DefaultSociosManager.getInstance();
-	private EmpleadosManager empleados = TestEmpleadosManager.getInstance();
-	private DeportesManager deportes = TestDeportesManager.getInstance();
+	// MANEJAR TODO CON LISTAS //
 	private List<Clase> clases;
 	private List<Abono> abonos;
+	private List<Empleado> empleados;
+	private List<Profesor> profesores;
+	private List<Socio> socios;
+	
 
 	public AreaAdministracion() {
 		super();
-		this.clases = clases;
-		this.abonos = abonos;
+		this.clases = new ArrayList<Clase>();
+		this.abonos = new ArrayList<Abono>();
+		this.empleados = new ArrayList<Empleado>();
+		this.profesores = new ArrayList<Profesor>();
+		this.socios = new ArrayList<Socio>();
+		
 	}
 	
 	// CRUD Socios
 
-	public void agregarSocio(String nombre, String domicilio, String telefono,
-			String mail) {
-		socios.addSocio(new Socio(nombre, domicilio, telefono, mail));
-		
+	public void agregarSocio(String nombre, String domicilio, String telefono,String mail) {
+		Socio s = new Socio(nombre, domicilio, telefono, mail);
+		//Abono a = new Abono (abono, precio, new Timestamp(Calendar.getInstance().getTimeInMillis()), new Timestamp(Calendar.getInstance().getTimeInMillis()));
+		//s.setAbono(a);
+		socios.add(s);
+		SociosManager.getInstance().addSocio(s);		
 	}
 	
 	public List<VistaSocio> obtenerSocios() {
+		
 		List<VistaSocio> listaVistasSocios = new ArrayList<VistaSocio>();
-		for (Socio s : socios.getAllSocios()) {
+		socios = SociosManager.getInstance().getAllSocios();
+		for (Socio s : socios ) {
 			listaVistasSocios.add(s.getView());
 		}
 		return listaVistasSocios;		
 	}
 
-	public void modificarSocio(int idSocio, String nombre, String domicilio,
-			String telefono, String mail) throws Exception {
+	public void modificarSocio(int idSocio, String nombre, String domicilio,String telefono, String mail) throws Exception {
 		// TODO Auto-generated method stub
 		Socio s = null;
-		for (Socio currentSocio : socios.getAllSocios()) {
+		socios = SociosManager.getInstance().getAllSocios();
+		for (Socio currentSocio : socios) {
 			if (currentSocio.getIdSocio() == idSocio) {
-				s = currentSocio;
-				break;
+				currentSocio.setNombre(nombre);
+				currentSocio.setDomicilio(domicilio);
+				currentSocio.setTelefono(telefono);
+				currentSocio.setMail(mail);
+				SociosManager.getInstance().editSocio(idSocio, currentSocio);
 			}
 		}
-		s.setNombre(nombre);
-		s.setDomicilio(domicilio);
-		s.setTelefono(telefono);
-		s.setMail(mail);
-		socios.editSocio(idSocio, s); 
 	}
-
+	
 	public void eliminarSocio(int idSocio) {
-		socios.deleteSocio(idSocio);
+		
+		for (Socio s : socios){
+			if (s.getIdSocio()== idSocio){
+				socios.remove(s);
+			}
+		}
+		SociosManager.getInstance().deleteSocio(idSocio);
 	}
 	
 	// CRUD Empleados
@@ -79,14 +95,20 @@ public class AreaAdministracion {
 	
 	public List<VistaEmpleado> obtenerEmpleados() {
 		List<VistaEmpleado> listaVistasEmpleados = new ArrayList<VistaEmpleado>();
-		for (Empleado s : empleados.getAllEmpleados()) {
-			listaVistasEmpleados.add(s.getView());
+		empleados = new ArrayList<Empleado>();
+		for (Empleado e : empleados) {
+			VistaEmpleado ve = e.getView();
+			listaVistasEmpleados.add(ve);
 		}
-		return listaVistasEmpleados;
+		
+		if (listaVistasEmpleados.size() != 0)
+			return listaVistasEmpleados;
+			
+		return EmpleadosManager.getInstance().findAll();
+		
 	}
 
-	public void modificarEmpleado(int codigo, String nombre,
-			String telefono, String mail, String puesto) throws Exception {
+	public void modificarEmpleado(int codigo, String nombre,String telefono, String mail, String puesto){
 		// TODO Auto-generated method stub
 		Empleado s = null;
 		for (Empleado currentEmpelado : empleados.getAllEmpleados()) {
@@ -140,6 +162,33 @@ public class AreaAdministracion {
 	public List<String> obtenerEmailSocios() {
 		return socios.getAllSociosEmails();		
 		
+	}
+	
+	//Liquidacion de Sueldos
+	public float liquidarSueldos(int mes, int ano) throws SocioException
+	{
+		try {
+			empleados = EmpleadosManager.getInstancia().findAll();
+			profesores = 
+		} catch (EmpleadoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		float total=0;
+		for (int i=0; i< empleados.size();i++)
+		{
+			Sueldo s = new Sueldo(mes,ano,empleados.elementAt(i),empleados.elementAt(i).liquidarSueldo());
+			total = total + s.getSueldoNeto();
+			sueldos.add(s);
+			SueldoDAO.getInstancia().save(s);
+		}
+		return total;
+	}
+	
+	//CRUD ABONO
+	public List<VistaAbono> obtenerAbono() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -10,37 +10,39 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
+
 import Negocio.Abono;
+import Negocio.Profesor;
 import Negocio.Socio;
 
-
-
-
-public class DefaultSociosManager implements SociosManager{
-
-	private static DefaultSociosManager instance = new DefaultSociosManager();	
-	public static DefaultSociosManager getInstance() {
+public class ProfesoresManager {
+private static ProfesoresManager instance = new ProfesoresManager();	
+	
+	public static ProfesoresManager getInstance() {
 		return instance;
 	}
 	
-	public List<Socio> getAllSocios() {
+	public List<Socio> getAllProfesores() {
 		
 		try
 		{
 			
-			Vector <Socio>rta = new Vector<Socio>();
+			List <Profesor>rta = new List <Profesor>();
 			Connection c = PoolConnection.getPoolConnection().getConnection();
 			Statement s = c.createStatement();
-			ResultSet result = s.executeQuery("SELECT [SocioID], [Nombre],[Domicilio],[Telefono],[Email] FROM [ADMGym].[dbo].[Socio]");
+			ResultSet result = s.executeQuery("SELECT [SocioID], [SocioID], [Matricula],[ValorHora],[Sueldo],[Tipo] FROM [ADMGym].[dbo].[Profesor]");
 			while (result.next())
 			{
-				int idSocio = result.getInt(1);
-				String nombre = result.getString(2);
-				String domicilio = result.getString(3);
-				String telefono = result.getString(4);
-				String mail = result.getString(5);				
+				if (result.getString(6) == 'particular')
 					
-				Socio socio = new Socio(idSocio, nombre, domicilio, telefono, mail);
+					int idSocio = result.getInt(1);
+					String nombre = result.getString(2);
+					String telefono = result.getString(3);
+					String mail = result.getString(4);				
+					int matricula = result.getInt(5);
+					float valorHora = result.getInt(6);
+					
+					Particular particular = new Particular(idSocio,nombre,telefono,mail,matricula,valorHora) ;
 			    rta.add(socio);
 				
 			}
@@ -79,15 +81,16 @@ public class DefaultSociosManager implements SociosManager{
 		    try (ResultSet generatedKeys = s.getGeneratedKeys()) {
 	            if (generatedKeys.next()) {
 	            	
-	            	//Podiamos agregar un combo con los nombres de los abonos y otro para los precios asociados.
-	            		              	
-	            	Abono abono = new Abono("Platinum", 1200, new Timestamp(Calendar.getInstance().getTimeInMillis()));
-	            	SQL_INSERT_ABONO = "INSERT INTO [dbo].[Abono] ([Nombre],[Precio], [PeriodoVigencia], [SocioID]) VALUES (?,?,?,?)";
+	            	//Podiamos agregar un combo con los nombres de los abonos y otro para los precios asociados.//
+	            		              
+	            	Abono abono = new Abono("Platinum", 1200, new Timestamp(Calendar.getInstance().getTimeInMillis()),new Timestamp(Calendar.getInstance().getTimeInMillis()));
+	            	SQL_INSERT_ABONO = "INSERT INTO [dbo].[Abono] ([Nombre],[Precio], [VigenciaDesde],, [VigenciaHasta], [SocioID]) VALUES (?,?,?,?,?)";
 	            	a = con.prepareStatement(SQL_INSERT_ABONO);
 	     			a.setString(1, abono.getNombre());
 	     			a.setFloat(2, abono.getPrecio());
-	     			a.setTimestamp(3, abono.getPeriodoVigencia());
-	     			a.setInt(4, generatedKeys.getInt(1));		
+	     			a.setTimestamp(3, abono.getVigenciaDesde());
+	     			a.setTimestamp(4, abono.getVigenciaHasta());
+	     			a.setInt(5, generatedKeys.getInt(1));		
 	     			a.execute();
 	            }
 	            else {
