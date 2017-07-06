@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import Controlador.AreaAdministracion;
 import Excepciones.SocioException;
 import Negocio.Socio;
+import ViewModels.VistaClase;
 import ViewModels.VistaSocio;
 
 	public class ListadoSocio extends JFrame {

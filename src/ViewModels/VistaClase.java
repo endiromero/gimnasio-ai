@@ -10,19 +10,25 @@ import Negocio.Deporte;
 public class VistaClase {
 	
 	private int codigo;
-	private Date fecha;
+	private String dia;
+	private String hora;
 	
-	public VistaClase (int codigo, Date fecha){
+	public VistaClase (int codigo, String dia, String hora){
 		this.codigo = codigo;
-		this.fecha = fecha;
+		this.dia = dia;
+		this.hora = hora;
 	}
 
 	public int getCodigo() {
 		return codigo;
 	}
 
-	public Date getFecha() {
-		return fecha;
+	public String getDia() {
+		return dia;
+	}
+	
+	public String getHora() {
+		return hora;
 	}
 
 }

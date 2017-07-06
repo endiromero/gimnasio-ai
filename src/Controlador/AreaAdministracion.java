@@ -22,10 +22,10 @@ public class AreaAdministracion {
 	
 	// CUANDO TENGAMOS EL MANAGER QUE LE PEGUE A LA DB, CAMBIAR EL DE TEST POR ESE NUEVO.
 	//private SociosManager socios = TestSociosManager.getInstance();
-	private SociosManager socios = DefaultSociosManager.getInstance();
+	private SociosManager socios = TestSociosManager.getInstance();
 	private EmpleadosManager empleados = TestEmpleadosManager.getInstance();
 	private DeportesManager deportes = TestDeportesManager.getInstance();
-	private List<Clase> clases;
+	private ClasesManager clases = TestClasesManager.getInstance();
 	private List<Abono> abonos;
 
 	public AreaAdministracion() {
@@ -140,6 +140,37 @@ public class AreaAdministracion {
 	public List<String> obtenerEmailSocios() {
 		return socios.getAllSociosEmails();		
 		
+	}
+
+	// CRUD Clases
+	public void agregarClase(String día, String hora) {
+		clases.addClase(new Clase(día, hora));
+	}
+	
+	public List<VistaClase> obtenerClases() {
+		List<VistaClase> listaVistasClases = new ArrayList<VistaClase>();
+		for (Clase s : clases.getAllClases()) {
+			listaVistasClases.add(s.getView());
+		}
+		return listaVistasClases;
+	}
+
+	public void modificarClase(int código, String día, String hora) throws Exception {
+		// TODO Auto-generated method stub
+		Clase s = null;
+		for (Clase currentClase : clases.getAllClases()) {
+			if (currentClase.getCodigo() == código) {
+				s = currentClase;
+				break;
+			}
+		}
+		s.setDia(día);
+		s.setHora(hora);
+		clases.editClase(código, s);
+	}
+
+	public void eliminarClase(int codigo) {
+		clases.deleteClase(codigo);
 	}
 
 }

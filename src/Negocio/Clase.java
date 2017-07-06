@@ -8,19 +8,22 @@ public class Clase {
 
 	// Backing fields
 	private int codigo;
-	private Date fecha;
+	private String dia;
+	private String hora;
 	private Profesor profesor;
 	
 	// Constructors
-	public Clase(int codigo, Date fecha) {
+	public Clase(int codigo, String dia, String hora) {
 		super();
 		this.codigo = codigo;
-		this.fecha = fecha;
+		this.dia = dia;
+		this.hora = hora;
 	}
 	
-	public Clase(Date fecha) {
+	public Clase(String dia, String hora) {
 		super();
-		this.fecha = fecha;
+		this.dia = dia;
+		this.hora = hora;
 	}
 	
 	public Clase() {
@@ -36,11 +39,18 @@ public class Clase {
 		this.codigo = codigo;
 	}
 	
-	public Date getFecha() {
-		return fecha;
+	public String getDia() {
+		return dia;
 	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setDia(String dia) {
+		this.dia = dia;
+	}
+	
+	public String getHora() {
+		return hora;
+	}
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
 	
 	public Profesor getProfesor() {
@@ -52,7 +62,7 @@ public class Clase {
 
 	// View
 	public VistaClase getView(){
-		return new VistaClase(codigo, fecha);
+		return new VistaClase(codigo, dia, hora);
 	}
 	
 	

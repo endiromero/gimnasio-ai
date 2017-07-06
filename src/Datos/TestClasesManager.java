@@ -17,18 +17,19 @@ public class TestClasesManager implements ClasesManager {
 	private ArrayList<Clase> clasesBackingList = new ArrayList<Clase>();
 	
 	private TestClasesManager() {
-		clasesBackingList.add(new Clase(0, new Date()));
-		clasesBackingList.add(new Clase(1, new Date()));
+		clasesBackingList.add(new Clase(0, "LUNES", "18:00"));
+		clasesBackingList.add(new Clase(1, "SÁBADO", "14:00"));
 	}
 
 	@Override
 	public List<Clase> getAllClases() {
 		List<Clase> result = new ArrayList<Clase>();
 		// Copiamos cada uno de los socios para simular traída de DB.
-		for (Clase currentSocio : clasesBackingList) {
+		for (Clase currentClase : clasesBackingList) {
 			result.add(new Clase(
-				currentSocio.getCodigo(),
-				currentSocio.getFecha()
+				currentClase.getCodigo(),
+				currentClase.getDia(),
+				currentClase.getHora()
 			));
 		}
 		return result;
@@ -39,7 +40,8 @@ public class TestClasesManager implements ClasesManager {
 		newClase.setCodigo(getMaxId() + 1);
 		clasesBackingList.add(new Clase(
 				newClase.getCodigo(),
-				newClase.getFecha()
+				newClase.getDia(),
+				newClase.getHora()
 			));
 	}
 	
@@ -61,7 +63,8 @@ public class TestClasesManager implements ClasesManager {
 				s = currentClase;
 				break;
 			}
-		s.setFecha(modifiedClase.getFecha());
+		s.setDia(modifiedClase.getDia());
+		s.setHora(modifiedClase.getHora());
 	}
 
 	@Override
