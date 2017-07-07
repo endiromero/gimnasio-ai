@@ -96,10 +96,10 @@ public class ListadoClase extends JFrame {
 	public void fillTable() {
 		items = getItems();
 		Vector<String> aux;
-		String[] cabecera = { "Codigo", "Día", "Hora", "", "" };
+		String[] cabecera = { "Codigo", "Día", "Hora", "Deporte", "", "" };
 
 		dataModel = new DefaultTableModel();
-		dataModel.setColumnCount(5);
+		dataModel.setColumnCount(6);
 		dataModel.setColumnIdentifiers(cabecera);
 		tblItems.setModel(dataModel);
 		tblItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -110,6 +110,7 @@ public class ListadoClase extends JFrame {
 			aux.add(Integer.toString(item.getCodigo()));
 			aux.add(item.getDia().toString());
 			aux.add(item.getHora().toString());
+			aux.add(item.getDeporte().toString());
 			dataModel.addRow(aux);
 		}
 
@@ -123,7 +124,7 @@ public class ListadoClase extends JFrame {
 				FormClase editWindow = new FormClase("Editar Clase", id, ListadoClase.this.listadoClases);
 			}
 		};
-		buttonColumn = new ButtonColumn(tblItems, a, 3, "Editar");
+		buttonColumn = new ButtonColumn(tblItems, a, 4, "Editar");
 
 		a = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
@@ -133,7 +134,7 @@ public class ListadoClase extends JFrame {
 				ListadoClase.this.listadoClases.fillTable();
 			}
 		};
-		buttonColumn = new ButtonColumn(tblItems, a, 4, "Eliminar");
+		buttonColumn = new ButtonColumn(tblItems, a, 5, "Eliminar");
 	}
 
 	private List<VistaClase> getItems() {

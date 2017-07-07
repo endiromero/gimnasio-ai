@@ -26,7 +26,7 @@ public class AreaAdministracion {
 	private SociosManager socios = TestSociosManager.getInstance();
 	// private EmpleadosManager empleados; // =
 	// DefaultEmpleadosManager.getInstance();
-	private DeportesManager deportes;// = DefaultDeportesManager.getInstance();
+	private DeportesManager deportes = TestDeportesManager.getInstance();
 	private ClasesManager clases = TestClasesManager.getInstance();
 	// private List<Abono> abonos;
 	// private List<Profesor> profesores;
@@ -181,8 +181,12 @@ public class AreaAdministracion {
 	}
 
 	// CRUD Clases
-	public void agregarClase(String día, String hora) {
-		clases.addClase(new Clase(día, hora));
+	public void agregarClase(String día, String hora, int idDeporte) {
+		try {
+			clases.addClase(new Clase(día, hora, deportes.getDeporteById(idDeporte)));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public List<VistaClase> obtenerClases() {
@@ -193,7 +197,7 @@ public class AreaAdministracion {
 		return listaVistasClases;
 	}
 
-	public void modificarClase(int código, String día, String hora) throws Exception {
+	public void modificarClase(int código, String día, String hora, int idDeporte) throws Exception {
 		// TODO Auto-generated method stub
 		Clase s = null;
 		for (Clase currentClase : clases.getAllClases()) {
@@ -204,6 +208,7 @@ public class AreaAdministracion {
 		}
 		s.setDia(día);
 		s.setHora(hora);
+		s.setDeporte(deportes.getDeporteById(idDeporte));
 		clases.editClase(código, s);
 	}
 

@@ -5,6 +5,8 @@ import java.util.List;
 import Negocio.Deporte;
 
 public interface DeportesManager {
+	
+	Deporte getDeporteById(int idDeporte) throws Exception;
 
 	List<Deporte> getAllDeportes();
 

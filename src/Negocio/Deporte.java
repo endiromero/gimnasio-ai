@@ -62,6 +62,11 @@ public class Deporte {
 	public void setClases(Vector<Clase> clases) {
 		this.clases = clases;
 	}
+	
+	// Functions
+	public boolean sosDeporte(int idDeporte) {
+		return this.idDeporte == idDeporte;
+	}
 
 	// View
 	public VistaDeporte getView() {

@@ -1,6 +1,7 @@
 package Vistas;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -8,28 +9,27 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-
 import javax.swing.*;
-import org.jdatepicker.*;
-import org.jdatepicker.impl.JDatePickerImpl;
-
 import Controlador.AreaAdministracion;
-import Negocio.Socio;
 import ViewModels.VistaClase;
-import ViewModels.VistaProfesor;
+import ViewModels.VistaDeporte;
 import ViewModels.VistaSocio;
 
 public class FormClase extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3694828204386389372L;
 	private JPanel pnlContenedor;
 	private JPanel pnlCentro;
 	private JButton btnGuardar;
 	private JLabel lblTitulo;
 	private JLabel lblDia;
 	private JLabel lblHorario;
+	private JLabel lblDeporte;
 	private JTextField txtDía;
 	private JTextField txtHora;
+	private JComboBox<VistaDeporte> cmbDeporte;
 	VistaClase entidad;
 	//private JComboBox<VistaProfesor> cmbProfesor;
 	private int id;
@@ -53,7 +53,6 @@ public class FormClase extends JFrame{
 		this.getContentPane().add(this.getPanelContenedor());
 		
 		if(codigo != -1){
-			VistaSocio claseAEditar = null;
 			for(VistaClase currentVistaClase: lst.items){
 				if(currentVistaClase.getCodigo() == id){
 					this.entidad = currentVistaClase;
@@ -70,6 +69,7 @@ public class FormClase extends JFrame{
 	private void bindView(){
 		txtDía.setText(entidad.getDia());
 		txtHora.setText(entidad.getHora());
+		cmbDeporte.setSelectedItem(entidad.getDeporte());
 	}
 
 	private JPanel getPanelContenedor() {
@@ -121,6 +121,22 @@ public class FormClase extends JFrame{
 		gbc.gridy = 1; // n�mero fila
 		gbc.weightx = 0.9;
 		pnlCentro.add(txtHora, gbc); // agregar el textField al panel contenedor
+		
+		lblDeporte = new JLabel("Deporte:");
+		lblDeporte.setHorizontalAlignment(JLabel.RIGHT);
+		gbc.gridx = 0; // n�mero columna
+		gbc.gridy = 2; // n�mero fila
+		gbc.weightx = 0.1;
+		pnlCentro.add(lblDeporte, gbc); // agregar el label al panel contenedor
+
+		cmbDeporte = new JComboBox<VistaDeporte>();
+		gbc.gridx = 1; // n�mero columna
+		gbc.gridy = 2; // n�mero fila
+		gbc.weightx = 0.9;
+		for(VistaDeporte vd: AreaAdministracion.getInstancia().obtenerDeportes()) {
+			cmbDeporte.addItem(vd);
+		}
+		pnlCentro.add(cmbDeporte, gbc); // agregar el textField al panel contenedor
 
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
@@ -140,10 +156,10 @@ public class FormClase extends JFrame{
 				}
 
 				if(id == -1)
-					AreaAdministracion.getInstancia().agregarClase(txtDía.getText(), txtHora.getText());
+					AreaAdministracion.getInstancia().agregarClase(txtDía.getText(), txtHora.getText(), ((VistaDeporte)cmbDeporte.getSelectedItem()).getIdDeporte());
 				else {
 					try {
-						AreaAdministracion.getInstancia().modificarClase(entidad.getCodigo(), txtDía.getText(), txtHora.getText());
+						AreaAdministracion.getInstancia().modificarClase(entidad.getCodigo(), txtDía.getText(), txtHora.getText(), ((VistaDeporte)cmbDeporte.getSelectedItem()).getIdDeporte());
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -167,4 +183,5 @@ public class FormClase extends JFrame{
 		lst.fillTable();
 		this.dispose();
 	}
+	
 }

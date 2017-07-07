@@ -13,6 +13,12 @@ public class DefaultDeportesManager implements DeportesManager {
 		return instance;
 	}
 
+	public Deporte getDeporteById(int idDeporte) {
+
+		throw new NotImplementedException();
+
+	}
+
 	public List<Deporte> getAllDeportes() {
 
 		throw new NotImplementedException();

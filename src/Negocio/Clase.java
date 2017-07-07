@@ -9,19 +9,22 @@ public class Clase {
 	private String dia;
 	private String hora;
 	private Profesor profesor;
+	private Deporte deporte;
 
 	// Constructors
-	public Clase(int codigo, String dia, String hora) {
+	public Clase(int codigo, String dia, String hora, Deporte deporte) {
 		super();
 		this.codigo = codigo;
 		this.dia = dia;
 		this.hora = hora;
+		this.deporte = deporte;
 	}
 
-	public Clase(String dia, String hora) {
+	public Clase(String dia, String hora, Deporte deporte) {
 		super();
 		this.dia = dia;
 		this.hora = hora;
+		this.deporte = deporte;
 	}
 
 	public Clase() {
@@ -61,9 +64,17 @@ public class Clase {
 		this.profesor = profesor;
 	}
 
+	public Deporte getDeporte() {
+		return deporte;
+	}
+
+	public void setDeporte(Deporte deporte) {
+		this.deporte = deporte;
+	}
+
 	// View
 	public VistaClase getView() {
-		return new VistaClase(codigo, dia, hora);
+		return new VistaClase(codigo, dia, hora, deporte.getView());
 	}
 
 }

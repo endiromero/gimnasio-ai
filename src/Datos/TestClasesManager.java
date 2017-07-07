@@ -16,8 +16,12 @@ public class TestClasesManager implements ClasesManager {
 	private ArrayList<Clase> clasesBackingList = new ArrayList<Clase>();
 
 	private TestClasesManager() {
-		clasesBackingList.add(new Clase(0, "LUNES", "18:00"));
-		clasesBackingList.add(new Clase(1, "SÁBADO", "14:00"));
+		try {
+			clasesBackingList.add(new Clase(0, "LUNES", "18:00", TestDeportesManager.getInstance().getDeporteById(1)));
+			clasesBackingList.add(new Clase(1, "SÁBADO", "14:00", TestDeportesManager.getInstance().getDeporteById(2)));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -25,7 +29,7 @@ public class TestClasesManager implements ClasesManager {
 		List<Clase> result = new ArrayList<Clase>();
 		// Copiamos cada uno de los socios para simular traída de DB.
 		for (Clase currentClase : clasesBackingList) {
-			result.add(new Clase(currentClase.getCodigo(), currentClase.getDia(), currentClase.getHora()));
+			result.add(new Clase(currentClase.getCodigo(), currentClase.getDia(), currentClase.getHora(), currentClase.getDeporte()));
 		}
 		return result;
 	}
@@ -33,7 +37,7 @@ public class TestClasesManager implements ClasesManager {
 	@Override
 	public void addClase(Clase newClase) {
 		newClase.setCodigo(getMaxId() + 1);
-		clasesBackingList.add(new Clase(newClase.getCodigo(), newClase.getDia(), newClase.getHora()));
+		clasesBackingList.add(new Clase(newClase.getCodigo(), newClase.getDia(), newClase.getHora(), newClase.getDeporte()));
 	}
 
 	private int getMaxId() {
@@ -56,6 +60,7 @@ public class TestClasesManager implements ClasesManager {
 			}
 		s.setDia(modifiedClase.getDia());
 		s.setHora(modifiedClase.getHora());
+		s.setDeporte(modifiedClase.getDeporte());
 	}
 
 	@Override

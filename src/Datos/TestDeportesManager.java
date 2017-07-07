@@ -21,6 +21,16 @@ public class TestDeportesManager implements DeportesManager {
 	}
 
 	@Override
+	public Deporte getDeporteById(int idDeporte) throws Exception {
+		for (Deporte currentDeporte : deportesBackingList) {
+			if (currentDeporte.sosDeporte(idDeporte))
+				return new Deporte(currentDeporte.getIdDeporte(), currentDeporte.getTitulo(),
+						currentDeporte.getDescripcion());
+		}
+		throw new Exception("No existe el deporte con el id " + idDeporte);
+	}
+
+	@Override
 	public List<Deporte> getAllDeportes() {
 		List<Deporte> result = new ArrayList<Deporte>();
 		// Copiamos cada uno de los socios para simular traída de DB.

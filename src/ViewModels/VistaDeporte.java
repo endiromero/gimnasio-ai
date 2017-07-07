@@ -24,4 +24,16 @@ public class VistaDeporte {
 		return descripcion;
 	}
 
+	@Override
+	public boolean equals(Object other) {
+		VistaDeporte otra = (VistaDeporte) other;
+		return (this.idDeporte == otra.getIdDeporte() && this.titulo == otra.getTitulo()
+				&& this.descripcion == otra.getDescripcion());
+	}
+	
+	@Override
+	public String toString() {
+		return titulo;
+	}
+
 }

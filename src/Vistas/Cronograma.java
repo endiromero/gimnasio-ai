@@ -36,7 +36,7 @@ public class Cronograma extends JFrame {
 	public Cronograma() {
 		this.listadoClases = this;
 		// Establecer el titulo de la ventana
-		this.setTitle("ABM de Clases");
+		this.setTitle("CRONOGRAMA");
 		// Establecer la dimension de la ventana (ancho, alto)
 		this.setSize(750, 400);
 		// Establecer NO dimensionable la ventana
@@ -54,7 +54,7 @@ public class Cronograma extends JFrame {
 		pnlInferior = new JPanel();
 		pnlContenedor.setLayout(new BorderLayout());
 
-		lblTitulo = new JLabel("Listado de Clases");
+		lblTitulo = new JLabel("Cronograma");
 		lblTitulo.setFont(new Font("Serif", Font.BOLD, 20));
 		lblTitulo.setHorizontalAlignment(JLabel.CENTER);
 
@@ -88,7 +88,7 @@ public class Cronograma extends JFrame {
 	public void fillTable() {
 		items = getItems();
 		Vector<String> aux;
-		String[] cabecera = { "Codigo", "Día", "Hora" };
+		String[] cabecera = { "Deporte", "Día", "Hora" };
 
 		dataModel = new DefaultTableModel();
 		dataModel.setColumnCount(5);
@@ -99,7 +99,7 @@ public class Cronograma extends JFrame {
 		// List<Socio> items = AreaAdministracion.getInstancia().obtenerSocios();
 		for (VistaClase item : items) {
 			aux = new Vector<String>();
-			aux.add(Integer.toString(item.getCodigo()));
+			aux.add(item.getDeporte().toString());
 			aux.add(item.getDia().toString());
 			aux.add(item.getHora().toString());
 			dataModel.addRow(aux);

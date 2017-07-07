@@ -40,7 +40,7 @@ public class PanelDeControl extends JFrame {
 		// Establecer el titulo de la ventana
 		this.setTitle("Panel de Control");
 		// Establecer la dimension de la ventana (ancho, alto)
-		this.setSize(450, 300);
+		this.setSize(640, 480);
 		// Establecer NO dimensionable la ventana
 		this.setResizable(false);
 		// Ubicar la ventana en el centro de la pantalla
