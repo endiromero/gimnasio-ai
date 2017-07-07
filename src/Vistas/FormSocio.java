@@ -83,7 +83,7 @@ public class FormSocio extends JFrame {
 		pnlContenedor = new JPanel();
 		pnlContenedor.setLayout(new BorderLayout());
 		if (this.id == -1)
-			lblTitulo = new JLabel("Alta Cliente");
+			lblTitulo = new JLabel("Alta Socio");
 		else
 			lblTitulo = new JLabel("Editar Socio");
 		lblTitulo.setFont(new Font("Serif", Font.BOLD, 20));

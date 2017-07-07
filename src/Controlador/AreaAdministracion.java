@@ -22,8 +22,9 @@ public class AreaAdministracion {
 
 	// CUANDO TENGAMOS EL MANAGER QUE LE PEGUE A LA DB, CAMBIAR EL DE TEST POR ESE
 	// NUEVO.
-
-	private SociosManager socios = TestSociosManager.getInstance();
+	
+	//private SociosManager socios = TestSociosManager.getInstance();
+	private SociosManager socios = DefaultSociosManager.getInstance();
 	// private EmpleadosManager empleados; // =
 	// DefaultEmpleadosManager.getInstance();
 	private DeportesManager deportes = TestDeportesManager.getInstance();
