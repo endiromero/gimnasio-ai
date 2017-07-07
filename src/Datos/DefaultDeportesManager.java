@@ -5,7 +5,6 @@ import java.util.List;
 import Negocio.Deporte;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-
 public class DefaultDeportesManager implements DeportesManager {
 
 	private static DefaultDeportesManager instance = new DefaultDeportesManager();
@@ -17,7 +16,7 @@ public class DefaultDeportesManager implements DeportesManager {
 	public List<Deporte> getAllDeportes() {
 
 		throw new NotImplementedException();
-		
+
 	}
 
 	public void addDeporte(Deporte newDeporte) {

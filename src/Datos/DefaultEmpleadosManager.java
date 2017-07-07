@@ -9,7 +9,7 @@ import Negocio.Administrativo;
 import Negocio.Empleado;
 import Negocio.Profesor;
 
-public class DefaultEmpleadosManager{
+public class DefaultEmpleadosManager {
 
 	private static DefaultEmpleadosManager instance = new DefaultEmpleadosManager();
 

@@ -24,16 +24,17 @@ public class AreaAdministracion {
 	// NUEVO.
 
 	private SociosManager socios = TestSociosManager.getInstance();
-	//private EmpleadosManager empleados; // = DefaultEmpleadosManager.getInstance();
+	// private EmpleadosManager empleados; // =
+	// DefaultEmpleadosManager.getInstance();
 	private DeportesManager deportes;// = DefaultDeportesManager.getInstance();
 	private ClasesManager clases = TestClasesManager.getInstance();
-//	private List<Abono> abonos;
-//	private List<Profesor> profesores;
+	// private List<Abono> abonos;
+	// private List<Profesor> profesores;
 
 	public AreaAdministracion() {
 		super();
-//		this.abonos = new ArrayList<Abono>();
-//		this.profesores = new ArrayList<Profesor>();
+		// this.abonos = new ArrayList<Abono>();
+		// this.profesores = new ArrayList<Profesor>();
 	}
 
 	// CRUD Socios
@@ -74,44 +75,46 @@ public class AreaAdministracion {
 	}
 
 	// CRUD Empleados
-//	public void agregarEmpleado(String nombre, String telefono, String mail, String puesto) {
-//		empleados.addEmpleado(new Empleado(nombre, telefono, mail, puesto));
-//	}
-//
-//	public List<VistaEmpleado> obtenerEmpleados() {
-//		List<VistaEmpleado> listaVistasEmpleados = new ArrayList<VistaEmpleado>();
-//		empleados = new ArrayList<Empleado>();
-//		for (Empleado e : empleados) {
-//			VistaEmpleado ve = e.getView();
-//			listaVistasEmpleados.add(ve);
-//		}
-//
-//		if (listaVistasEmpleados.size() != 0)
-//			return listaVistasEmpleados;
-//
-//		return EmpleadosManager.getInstance().findAll();
-//
-//	}
-//
-//	public void modificarEmpleado(int codigo, String nombre, String telefono, String mail, String puesto) {
-//		// TODO Auto-generated method stub
-//		Empleado s = null;
-//		for (Empleado currentEmpelado : empleados.getAllEmpleados()) {
-//			if (currentEmpelado.getCodigo() == codigo) {
-//				s = currentEmpelado;
-//				break;
-//			}
-//		}
-//		s.setNombre(nombre);
-//		s.setTelefono(telefono);
-//		s.setMail(mail);
-//		s.setPuesto(puesto);
-//		empleados.editEmpleado(codigo, s);
-//	}
-//
-//	public void eliminarEmpleado(int codigo) {
-//		empleados.deleteEmpleado(codigo);
-//	}
+	// public void agregarEmpleado(String nombre, String telefono, String mail,
+	// String puesto) {
+	// empleados.addEmpleado(new Empleado(nombre, telefono, mail, puesto));
+	// }
+	//
+	// public List<VistaEmpleado> obtenerEmpleados() {
+	// List<VistaEmpleado> listaVistasEmpleados = new ArrayList<VistaEmpleado>();
+	// empleados = new ArrayList<Empleado>();
+	// for (Empleado e : empleados) {
+	// VistaEmpleado ve = e.getView();
+	// listaVistasEmpleados.add(ve);
+	// }
+	//
+	// if (listaVistasEmpleados.size() != 0)
+	// return listaVistasEmpleados;
+	//
+	// return EmpleadosManager.getInstance().findAll();
+	//
+	// }
+	//
+	// public void modificarEmpleado(int codigo, String nombre, String telefono,
+	// String mail, String puesto) {
+	// // TODO Auto-generated method stub
+	// Empleado s = null;
+	// for (Empleado currentEmpelado : empleados.getAllEmpleados()) {
+	// if (currentEmpelado.getCodigo() == codigo) {
+	// s = currentEmpelado;
+	// break;
+	// }
+	// }
+	// s.setNombre(nombre);
+	// s.setTelefono(telefono);
+	// s.setMail(mail);
+	// s.setPuesto(puesto);
+	// empleados.editEmpleado(codigo, s);
+	// }
+	//
+	// public void eliminarEmpleado(int codigo) {
+	// empleados.deleteEmpleado(codigo);
+	// }
 
 	// CRUD Deportes
 	public void agregarDeporte(String titulo, String descripcion) {
@@ -150,25 +153,26 @@ public class AreaAdministracion {
 	}
 
 	// Liquidacion de Sueldos
-//	public float liquidarSueldos(int mes, int ano) throws SocioException
-//	{
-//		try {
-//			empleados = EmpleadosManager.getInstancia().findAll();
-//			profesores = 
-//		} catch (EmpleadoException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		float total=0;
-//		for (int i=0; i< empleados.size();i++)
-//		{
-//			Sueldo s = new Sueldo(mes,ano,empleados.elementAt(i),empleados.elementAt(i).liquidarSueldo());
-//			total = total + s.getSueldoNeto();
-//			sueldos.add(s);
-//			SueldoDAO.getInstancia().save(s);
-//		}
-//		return total;
-//	}
+	// public float liquidarSueldos(int mes, int ano) throws SocioException
+	// {
+	// try {
+	// empleados = EmpleadosManager.getInstancia().findAll();
+	// profesores =
+	// } catch (EmpleadoException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// float total=0;
+	// for (int i=0; i< empleados.size();i++)
+	// {
+	// Sueldo s = new
+	// Sueldo(mes,ano,empleados.elementAt(i),empleados.elementAt(i).liquidarSueldo());
+	// total = total + s.getSueldoNeto();
+	// sueldos.add(s);
+	// SueldoDAO.getInstancia().save(s);
+	// }
+	// return total;
+	// }
 
 	// CRUD ABONO
 	public List<VistaAbono> obtenerAbono() {

@@ -55,9 +55,9 @@ public class DefaultSociosManager implements SociosManager {
 		try {
 			c = PoolConnection.getPoolConnection().getConnection();
 			PreparedStatement s;
-			//PreparedStatement a;
+			// PreparedStatement a;
 			String SQL_INSERT_SOCIO;
-			//String SQL_INSERT_ABONO;
+			// String SQL_INSERT_ABONO;
 
 			SQL_INSERT_SOCIO = "INSERT INTO [Socio] ([Nombre],[Domicilio],[Telefono],[Email]) VALUES (?,?,?,?)";
 			s = c.prepareStatement(SQL_INSERT_SOCIO, Statement.RETURN_GENERATED_KEYS);

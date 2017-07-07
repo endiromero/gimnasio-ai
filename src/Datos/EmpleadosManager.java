@@ -5,7 +5,7 @@ import java.util.List;
 import Negocio.Empleado;
 
 public interface EmpleadosManager {
-	
+
 	List<Empleado> getAllEmpleados() throws Exception;
 
 	void addEmpleado(Empleado newEmpleado);
