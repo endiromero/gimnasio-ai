@@ -1,14 +1,14 @@
 package Negocio;
 
 public class Profesor extends Empleado {
-	
+
 	private int matricula;
 
 	public Profesor(int idProfesor, String nombre, String telefono, String mail, int matricula) {
 		super(idProfesor, nombre, telefono, mail);
 		this.matricula = matricula;
 	}
-	
+
 	public Profesor(String nombre, String telefono, String mail, int matricula) {
 		super(nombre, telefono, mail);
 		this.matricula = matricula;

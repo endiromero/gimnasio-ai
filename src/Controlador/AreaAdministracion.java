@@ -1,13 +1,9 @@
 package Controlador;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import Datos.*;
-import Excepciones.EmpleadoException;
-import Excepciones.SocioException;
 import Negocio.*;
 import ViewModels.*;
 
@@ -28,16 +24,16 @@ public class AreaAdministracion {
 	// NUEVO.
 
 	private SociosManager socios = TestSociosManager.getInstance();
-	private EmpleadosManager empleados; // = DefaultEmpleadosManager.getInstance();
+	//private EmpleadosManager empleados; // = DefaultEmpleadosManager.getInstance();
 	private DeportesManager deportes;// = DefaultDeportesManager.getInstance();
 	private ClasesManager clases = TestClasesManager.getInstance();
-	private List<Abono> abonos;
-	private List<Profesor> profesores;
+//	private List<Abono> abonos;
+//	private List<Profesor> profesores;
 
 	public AreaAdministracion() {
 		super();
-		this.abonos = new ArrayList<Abono>();
-		this.profesores = new ArrayList<Profesor>();
+//		this.abonos = new ArrayList<Abono>();
+//		this.profesores = new ArrayList<Profesor>();
 	}
 
 	// CRUD Socios

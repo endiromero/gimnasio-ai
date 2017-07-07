@@ -1,16 +1,17 @@
 package Negocio;
 
 public class Contratado extends Profesor {
-	
+
 	private float bruto;
 	private float obraSocial;
 	private float retenciones;
 
-	public Contratado(String nombre, String telefono, String mail, int matricula, float bruto, float obraSocial, float retenciones) {
+	public Contratado(String nombre, String telefono, String mail, int matricula, float bruto, float obraSocial,
+			float retenciones) {
 		super(nombre, telefono, mail, matricula);
-		bruto = bruto;
-		obraSocial = obraSocial;
-		retenciones = retenciones;
+		this.bruto = bruto;
+		this.obraSocial = obraSocial;
+		this.retenciones = retenciones;
 	}
 
 	public float getBruto() {
@@ -18,7 +19,7 @@ public class Contratado extends Profesor {
 	}
 
 	public void setBruto(float bruto) {
-		bruto = bruto;
+		this.bruto = bruto;
 	}
 
 	public float getObraSocial() {
@@ -36,6 +37,5 @@ public class Contratado extends Profesor {
 	public void setRetenciones(float retenciones) {
 		this.retenciones = retenciones;
 	}
-	
 
 }

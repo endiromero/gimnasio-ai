@@ -1,7 +1,6 @@
 package Vistas;
 
-
-	import java.awt.BorderLayout;
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -23,20 +22,20 @@ import Negocio.Socio;
 import ViewModels.VistaClase;
 import ViewModels.VistaSocio;
 
-	public class Cronograma extends JFrame {
-		private JPanel pnlContenedor;
-		private JPanel pnlInferior;
-		private JTable tblItems;
-		private DefaultTableModel dataModel;
-		private JLabel lblTitulo;
-		private ButtonColumn buttonColumn;
-		private Cronograma listadoClases;
-		
-		List<VistaClase> items;
+public class Cronograma extends JFrame {
+	private JPanel pnlContenedor;
+	private JPanel pnlInferior;
+	private JTable tblItems;
+	private DefaultTableModel dataModel;
+	private JLabel lblTitulo;
+	private ButtonColumn buttonColumn;
+	private Cronograma listadoClases;
 
-		public Cronograma() {
-			this.listadoClases = this;
-			// Establecer el titulo de la ventana
+	List<VistaClase> items;
+
+	public Cronograma() {
+		this.listadoClases = this;
+		// Establecer el titulo de la ventana
 		this.setTitle("ABM de Clases");
 		// Establecer la dimension de la ventana (ancho, alto)
 		this.setSize(750, 400);
@@ -97,9 +96,8 @@ import ViewModels.VistaSocio;
 		tblItems.setModel(dataModel);
 		tblItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		
-		//List<Socio> items = AreaAdministracion.getInstancia().obtenerSocios();
-		for(VistaClase item : items) {
+		// List<Socio> items = AreaAdministracion.getInstancia().obtenerSocios();
+		for (VistaClase item : items) {
 			aux = new Vector<String>();
 			aux.add(Integer.toString(item.getCodigo()));
 			aux.add(item.getDia().toString());
@@ -107,7 +105,7 @@ import ViewModels.VistaSocio;
 			dataModel.addRow(aux);
 		}
 
-		if(tblItems == null)
+		if (tblItems == null)
 			tblItems = new JTable();
 
 	}

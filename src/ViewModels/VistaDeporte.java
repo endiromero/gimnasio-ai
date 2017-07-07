@@ -1,18 +1,12 @@
 package ViewModels;
 
-import java.util.Vector;
-
-import Negocio.Abono;
-import Negocio.AptoMedico;
-import Negocio.Deporte;
-
 public class VistaDeporte {
-	
+
 	private int idDeporte;
 	private String titulo;
 	private String descripcion;
-	
-	public VistaDeporte (int idDeporte, String titulo, String descripcion){
+
+	public VistaDeporte(int idDeporte, String titulo, String descripcion) {
 		this.idDeporte = idDeporte;
 		this.titulo = titulo;
 		this.descripcion = descripcion;

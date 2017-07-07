@@ -6,20 +6,18 @@ import java.util.List;
 import Negocio.Socio;
 
 public class TestSociosManager implements SociosManager {
-	
+
 	private static TestSociosManager instance = new TestSociosManager();
-	
+
 	public static TestSociosManager getInstance() {
 		return instance;
 	}
-	
+
 	private ArrayList<Socio> sociosBackingList = new ArrayList<Socio>();
-	
+
 	private TestSociosManager() {
-		sociosBackingList.add(new Socio(0, "COCA-COLA", "AV. CABILDO 123", "4557-7788",
-				"coca@coca-cola.com"));
-		sociosBackingList.add(new Socio(1, "GOOGLE", "AV. BELGRANO 456", "4557-7711",
-				"google@gmail.com"));
+		sociosBackingList.add(new Socio(0, "COCA-COLA", "AV. CABILDO 123", "4557-7788", "coca@coca-cola.com"));
+		sociosBackingList.add(new Socio(1, "GOOGLE", "AV. BELGRANO 456", "4557-7711", "google@gmail.com"));
 	}
 
 	@Override
@@ -27,13 +25,8 @@ public class TestSociosManager implements SociosManager {
 		List<Socio> result = new ArrayList<Socio>();
 		// Copiamos cada uno de los socios para simular traída de DB.
 		for (Socio currentSocio : sociosBackingList) {
-			result.add(new Socio(
-				currentSocio.getIdSocio(),
-				currentSocio.getNombre(),
-				currentSocio.getDomicilio(),
-				currentSocio.getTelefono(),
-				currentSocio.getMail()
-			));
+			result.add(new Socio(currentSocio.getIdSocio(), currentSocio.getNombre(), currentSocio.getDomicilio(),
+					currentSocio.getTelefono(), currentSocio.getMail()));
 		}
 		return result;
 	}
@@ -41,26 +34,21 @@ public class TestSociosManager implements SociosManager {
 	@Override
 	public void addSocio(Socio newSocio) {
 		newSocio.setIdSocio(getMaxId() + 1);
-		sociosBackingList.add(new Socio(
-				newSocio.getIdSocio(),
-				newSocio.getNombre(),
-				newSocio.getDomicilio(),
-				newSocio.getTelefono(),
-				newSocio.getMail()
-			));
+		sociosBackingList.add(new Socio(newSocio.getIdSocio(), newSocio.getNombre(), newSocio.getDomicilio(),
+				newSocio.getTelefono(), newSocio.getMail()));
 	}
-	
+
 	private int getMaxId() {
 		int maxId = 0;
-		for(Socio currentSocio: sociosBackingList)
-			if(currentSocio.getIdSocio() > maxId)
+		for (Socio currentSocio : sociosBackingList)
+			if (currentSocio.getIdSocio() > maxId)
 				maxId = currentSocio.getIdSocio();
 		return maxId;
 	}
 
 	@Override
 	public void editSocio(int idSocio, Socio modifiedSocio) throws Exception {
-		if(idSocio != modifiedSocio.getIdSocio())
+		if (idSocio != modifiedSocio.getIdSocio())
 			throw new Exception();
 		Socio s = null;
 		for (Socio currentSocio : sociosBackingList)
@@ -89,9 +77,7 @@ public class TestSociosManager implements SociosManager {
 	public List<String> getAllSociosEmails() {
 		List<String> result = new ArrayList<String>();
 		for (Socio currentSocio : sociosBackingList) {
-			result.add(
-				currentSocio.getMail()
-			);
+			result.add(currentSocio.getMail());
 		}
 		return result;
 	}

@@ -26,21 +26,13 @@ public class Liquidador extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Liquidador frame = new Liquidador();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
+	/*
+	 * public static void main(String[] args) { EventQueue.invokeLater(new
+	 * Runnable() { public void run() { try { Liquidador frame = new Liquidador();
+	 * frame.setVisible(true); } catch (Exception e) { e.printStackTrace(); } } });
+	 * }
+	 * 
+	 * /** Create the frame.
 	 */
 	public Liquidador() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,40 +44,41 @@ public class Liquidador extends JFrame {
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
 		this.setVisible(true);
-		
+
 		JLabel lblMes = new JLabel("Mes:");
 		lblMes.setBounds(22, 41, 46, 14);
 		contentPane.add(lblMes);
-		
+
 		mes = new JTextField();
 		mes.setBounds(91, 38, 86, 20);
 		contentPane.add(mes);
 		mes.setColumns(10);
-		
+
 		JLabel lblAo = new JLabel("A\u00F1o:");
 		lblAo.setBounds(22, 92, 46, 14);
 		contentPane.add(lblAo);
-		
+
 		anio = new JTextField();
 		anio.setBounds(91, 89, 86, 20);
 		contentPane.add(anio);
 		anio.setColumns(10);
-		
+
 		JButton btnLiquidarSueldos = new JButton("Liquidar Sueldos");
 		btnLiquidarSueldos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) 
-			{
+			public void actionPerformed(ActionEvent arg0) {
 				float totalSueldos;
 				try {
 					System.out.println("entro al action");
-					totalSueldos = 0F;//AreaAdministracion.getInstancia().liquidarSueldos(Integer.parseInt(mes.getText()), Integer.parseInt(anio.getText()));
-					JOptionPane.showMessageDialog(null,"El total de sueldos liquidados es : " + totalSueldos," Total Sueldos Liquidados ",JOptionPane.INFORMATION_MESSAGE);
+					totalSueldos = 0F;// AreaAdministracion.getInstancia().liquidarSueldos(Integer.parseInt(mes.getText()),
+										// Integer.parseInt(anio.getText()));
+					JOptionPane.showMessageDialog(null, "El total de sueldos liquidados es : " + totalSueldos,
+							" Total Sueldos Liquidados ", JOptionPane.INFORMATION_MESSAGE);
 					System.out.println("finaliza al action");
 				} catch (NumberFormatException e) {
-					JOptionPane.showMessageDialog(null,"Alguno de los datos ingresados es incorrecto");
-//				} catch (SocioException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Alguno de los datos ingresados es incorrecto");
+					// } catch (SocioException e) {
+					// // TODO Auto-generated catch block
+					// e.printStackTrace();
 				}
 			}
 		});
@@ -93,5 +86,3 @@ public class Liquidador extends JFrame {
 		contentPane.add(btnLiquidarSueldos);
 	}
 }
-
-
