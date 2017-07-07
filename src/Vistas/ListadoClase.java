@@ -7,9 +7,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowStateListener;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
 
@@ -17,18 +14,18 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import Controlador.AreaAdministracion;
-import Excepciones.SocioException;
-import Negocio.Socio;
 import ViewModels.VistaClase;
-import ViewModels.VistaSocio;
 
 public class ListadoClase extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -679231919409883151L;
 	private JPanel pnlContenedor;
 	private JPanel pnlInferior;
 	private JTable tblItems;
 	private DefaultTableModel dataModel;
 	private JLabel lblTitulo;
-	private ButtonColumn buttonColumn;
 	private JButton btnAlta;
 	private ListadoClase listadoClases;
 
@@ -118,15 +115,25 @@ public class ListadoClase extends JFrame {
 			tblItems = new JTable();
 
 		Action a = new AbstractAction() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 4892091821165881752L;
+
 			public void actionPerformed(ActionEvent e) {
 				int row = tblItems.getSelectedRow();
 				int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
-				FormClase editWindow = new FormClase("Editar Clase", id, ListadoClase.this.listadoClases);
+				new FormClase("Editar Clase", id, ListadoClase.this.listadoClases);
 			}
 		};
-		buttonColumn = new ButtonColumn(tblItems, a, 4, "Editar");
+		new ButtonColumn(tblItems, a, 4, "Editar");
 
 		a = new AbstractAction() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 5812903281689538950L;
+
 			public void actionPerformed(ActionEvent e) {
 				int row = tblItems.getSelectedRow();
 				int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
@@ -134,7 +141,7 @@ public class ListadoClase extends JFrame {
 				ListadoClase.this.listadoClases.fillTable();
 			}
 		};
-		buttonColumn = new ButtonColumn(tblItems, a, 5, "Eliminar");
+		new ButtonColumn(tblItems, a, 5, "Eliminar");
 	}
 
 	private List<VistaClase> getItems() {

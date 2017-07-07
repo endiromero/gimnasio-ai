@@ -5,11 +5,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowStateListener;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
 
@@ -17,24 +12,21 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import Controlador.AreaAdministracion;
-import Excepciones.SocioException;
-import Negocio.Socio;
 import ViewModels.VistaClase;
-import ViewModels.VistaSocio;
 
 public class Cronograma extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7305690017978747952L;
 	private JPanel pnlContenedor;
 	private JPanel pnlInferior;
 	private JTable tblItems;
 	private DefaultTableModel dataModel;
 	private JLabel lblTitulo;
-	private ButtonColumn buttonColumn;
-	private Cronograma listadoClases;
-
 	List<VistaClase> items;
 
 	public Cronograma() {
-		this.listadoClases = this;
 		// Establecer el titulo de la ventana
 		this.setTitle("CRONOGRAMA");
 		// Establecer la dimension de la ventana (ancho, alto)

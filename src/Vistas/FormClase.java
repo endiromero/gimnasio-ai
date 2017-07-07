@@ -1,7 +1,6 @@
 package Vistas;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -13,9 +12,8 @@ import javax.swing.*;
 import Controlador.AreaAdministracion;
 import ViewModels.VistaClase;
 import ViewModels.VistaDeporte;
-import ViewModels.VistaSocio;
 
-public class FormClase extends JFrame{
+public class FormClase extends JFrame {
 	/**
 	 * 
 	 */
@@ -31,7 +29,7 @@ public class FormClase extends JFrame{
 	private JTextField txtHora;
 	private JComboBox<VistaDeporte> cmbDeporte;
 	VistaClase entidad;
-	//private JComboBox<VistaProfesor> cmbProfesor;
+	// private JComboBox<VistaProfesor> cmbProfesor;
 	private int id;
 	private ListadoClase lst;
 	FormClase that = this;
@@ -40,7 +38,7 @@ public class FormClase extends JFrame{
 		this.id = codigo;
 		this.lst = lst;
 		this.entidad = null;
-		
+
 		// Establecer el titulo de la ventana
 		this.setTitle(frameTitle);
 		// Establecer la dimension de la ventana (ancho, alto)
@@ -51,22 +49,22 @@ public class FormClase extends JFrame{
 		this.setLocationRelativeTo(null);
 		// Agregar el panel al JFrame
 		this.getContentPane().add(this.getPanelContenedor());
-		
-		if(codigo != -1){
-			for(VistaClase currentVistaClase: lst.items){
-				if(currentVistaClase.getCodigo() == id){
+
+		if (codigo != -1) {
+			for (VistaClase currentVistaClase : lst.items) {
+				if (currentVistaClase.getCodigo() == id) {
 					this.entidad = currentVistaClase;
 					break;
 				}
 			}
 			bindView();
 		}
-		
+
 		// Mostrar la ventana
 		this.setVisible(true);
 	}
-	
-	private void bindView(){
+
+	private void bindView() {
 		txtDía.setText(entidad.getDia());
 		txtHora.setText(entidad.getHora());
 		cmbDeporte.setSelectedItem(entidad.getDeporte());
@@ -75,7 +73,7 @@ public class FormClase extends JFrame{
 	private JPanel getPanelContenedor() {
 		pnlContenedor = new JPanel();
 		pnlContenedor.setLayout(new BorderLayout());
-		if(this.id == -1) 
+		if (this.id == -1)
 			lblTitulo = new JLabel("Alta Clase");
 		else
 			lblTitulo = new JLabel("Editar Clase");
@@ -121,7 +119,7 @@ public class FormClase extends JFrame{
 		gbc.gridy = 1; // n�mero fila
 		gbc.weightx = 0.9;
 		pnlCentro.add(txtHora, gbc); // agregar el textField al panel contenedor
-		
+
 		lblDeporte = new JLabel("Deporte:");
 		lblDeporte.setHorizontalAlignment(JLabel.RIGHT);
 		gbc.gridx = 0; // n�mero columna
@@ -133,7 +131,7 @@ public class FormClase extends JFrame{
 		gbc.gridx = 1; // n�mero columna
 		gbc.gridy = 2; // n�mero fila
 		gbc.weightx = 0.9;
-		for(VistaDeporte vd: AreaAdministracion.getInstancia().obtenerDeportes()) {
+		for (VistaDeporte vd : AreaAdministracion.getInstancia().obtenerDeportes()) {
 			cmbDeporte.addItem(vd);
 		}
 		pnlCentro.add(cmbDeporte, gbc); // agregar el textField al panel contenedor
@@ -141,25 +139,25 @@ public class FormClase extends JFrame{
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(txtDía.getText().equals("")) {
-					JOptionPane.showMessageDialog(null,
-							"Por favor ingrese el día");
+				if (txtDía.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "Por favor ingrese el día");
 					txtDía.requestFocusInWindow();
 					return;
 				}
 
-				if(txtHora.getText().equals("")) {
-					JOptionPane.showMessageDialog(null,
-							"Por favor ingrese la hora");
+				if (txtHora.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "Por favor ingrese la hora");
 					txtHora.requestFocusInWindow();
 					return;
 				}
 
-				if(id == -1)
-					AreaAdministracion.getInstancia().agregarClase(txtDía.getText(), txtHora.getText(), ((VistaDeporte)cmbDeporte.getSelectedItem()).getIdDeporte());
+				if (id == -1)
+					AreaAdministracion.getInstancia().agregarClase(txtDía.getText(), txtHora.getText(),
+							((VistaDeporte) cmbDeporte.getSelectedItem()).getIdDeporte());
 				else {
 					try {
-						AreaAdministracion.getInstancia().modificarClase(entidad.getCodigo(), txtDía.getText(), txtHora.getText(), ((VistaDeporte)cmbDeporte.getSelectedItem()).getIdDeporte());
+						AreaAdministracion.getInstancia().modificarClase(entidad.getCodigo(), txtDía.getText(),
+								txtHora.getText(), ((VistaDeporte) cmbDeporte.getSelectedItem()).getIdDeporte());
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -183,5 +181,5 @@ public class FormClase extends JFrame{
 		lst.fillTable();
 		this.dispose();
 	}
-	
+
 }
