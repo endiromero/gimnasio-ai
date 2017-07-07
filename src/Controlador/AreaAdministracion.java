@@ -197,11 +197,11 @@ public class AreaAdministracion {
 		return listaVistasClases;
 	}
 
-	public void modificarClase(int código, String día, String hora, int idDeporte) throws Exception {
+	public void modificarClase(int codigo, String día, String hora, int idDeporte) throws Exception {
 		// TODO Auto-generated method stub
 		Clase s = null;
 		for (Clase currentClase : clases.getAllClases()) {
-			if (currentClase.getCodigo() == código) {
+			if (currentClase.getCodigo() == codigo) {
 				s = currentClase;
 				break;
 			}
@@ -209,7 +209,7 @@ public class AreaAdministracion {
 		s.setDia(día);
 		s.setHora(hora);
 		s.setDeporte(deportes.getDeporteById(idDeporte));
-		clases.editClase(código, s);
+		clases.editClase(codigo, s);
 	}
 
 	public void eliminarClase(int codigo) {
