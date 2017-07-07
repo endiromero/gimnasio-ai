@@ -4,44 +4,33 @@ import ViewModels.VistaEmpleado;
 import ViewModels.VistaSocio;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class Empleado {
+public abstract class Empleado {
 	
-	// Backing fields 
-	private int codigo;
+	// Backing fields
+	private int idEmpleado;
 	private String nombre;
 	private String telefono;
 	private String mail;
-	private String puesto;
 	
 	// Constructors
-	public Empleado(String nombre, String telefono, String mail, String puesto) {
-		super();
+	public Empleado(String nombre, String telefono, String mail) {
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.mail = mail;
-		this.puesto = puesto;
 	}
 	
-	public Empleado(int codigo, String nombre, String telefono, String mail, String puesto) {
-		super();
-		this.codigo = codigo;
+	public Empleado(int idEmpleado, String nombre, String telefono, String mail) {
+		this.idEmpleado = idEmpleado;
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.mail = mail;
-		this.puesto = puesto;
 	}
 	
-	public Empleado() {
-		// TODO Auto-generated constructor stub
+	public int getidEmpleado() {
+		return idEmpleado;
 	}
-
-	// Properties
-	
-	public int getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+	public void setidEmpleado(int idEmpleado) {
+		this.idEmpleado = idEmpleado;
 	}
 
 	public String getNombre() {
@@ -65,16 +54,7 @@ public class Empleado {
 		this.mail = mail;
 	}
 
-	public String getPuesto() {
-		return puesto;
-	}
-	public void setPuesto(String puesto) {
-		this.puesto = puesto;
-	}
-	
-	//View
 	public VistaEmpleado getView(){
-		return new VistaEmpleado(codigo, nombre, telefono, mail, puesto);
+		return new VistaEmpleado(idEmpleado, nombre, telefono, mail);
 	}
-
 }

@@ -9,8 +9,10 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowStateListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -20,12 +22,10 @@ import javax.swing.table.DefaultTableModel;
 import Controlador.AreaAdministracion;
 import Excepciones.SocioException;
 import Negocio.Socio;
-import ViewModels.VistaClase;
+import ViewModels.VistaAbono;
 import ViewModels.VistaSocio;
-import Vistas.FormSocio;
 
-	public class ListadoSocio extends JFrame {
-		
+	public class ListadoAbono extends JFrame {
 		private JPanel pnlContenedor;
 		private JPanel pnlInferior;
 		private JTable tblItems;
@@ -33,14 +33,14 @@ import Vistas.FormSocio;
 		private JLabel lblTitulo;
 		private ButtonColumn buttonColumn;
 		private JButton btnAlta;
-		private ListadoSocio listadoSocios;
+		private ListadoAbono listadoAbono;
 		
-		List<VistaSocio> items;
+		List<VistaAbono> items;
 
-		public ListadoSocio() {
-			this.listadoSocios = this;
+		public ListadoAbono() {
+			this.listadoAbono = this;
 			// Establecer el titulo de la ventana
-			this.setTitle("ABM de Socios");
+			this.setTitle("ABM de Abono");
 			// Establecer la dimension de la ventana (ancho, alto)
 			this.setSize(750, 400);
 			// Establecer NO dimensionable la ventana
@@ -58,7 +58,7 @@ import Vistas.FormSocio;
 			pnlInferior = new JPanel();
 			pnlContenedor.setLayout(new BorderLayout());
 
-			lblTitulo = new JLabel("Listado de Socios");
+			lblTitulo = new JLabel("Listado de Abono");
 			lblTitulo.setFont(new Font("Serif", Font.BOLD, 20));
 			lblTitulo.setHorizontalAlignment(JLabel.CENTER);
 
@@ -74,7 +74,7 @@ import Vistas.FormSocio;
 			btnAlta = new JButton("Nuevo");
 			btnAlta.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new FormSocio("Alta Socio", -1, ListadoSocio.this.listadoSocios);
+					new FormAbono("Alta Abono", -1, ListadoAbono.this.listadoAbono);
 				}
 			});
 			gbc.gridx = 0; // n�mero columna
@@ -99,7 +99,7 @@ import Vistas.FormSocio;
 		public void fillTable(String txt) {
 			items = getItems();
 			Vector<String> aux;
-			String[] cabecera = { "Nro Socio", "Nombre", "Domicilio", "Telefono", "Mail",
+			String[] cabecera = { "Id", "Nombre", "Precio", "Vigencia",
 					"", "" };
 
 			dataModel = new DefaultTableModel();
@@ -110,13 +110,16 @@ import Vistas.FormSocio;
 
 			
 			//List<Socio> items = AreaAdministracion.getInstancia().obtenerSocios();
-			for(VistaSocio item : items) {
+			for(VistaAbono item : items) {
 				aux = new Vector<String>();
-				aux.add(Integer.toString(item.getIdSocio()));
+				aux.add(Integer.toString(item.getIdAbono()));
 				aux.add(item.getNombre());
-				aux.add(item.getDomicilio());
-				aux.add(item.getTelefono());
-				aux.add(item.getMail());
+				aux.add(Float.toString(item.getPrecio()));
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Date fecha = new Date();
+				String fechaCadena = sdf.format(item.getVigencia());
+				aux.add(fechaCadena);
+				
 				dataModel.addRow(aux);
 			}
 
@@ -127,8 +130,7 @@ import Vistas.FormSocio;
 				public void actionPerformed(ActionEvent e) {
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
-					FormSocio editWindow = new FormSocio ("Editar Socio", id, ListadoSocio.this.listadoSocios);
-					
+					FormAbono editWindow = new FormAbono("Editar Abono", id, ListadoAbono.this.listadoAbono);
 				}
 			};
 			buttonColumn = new ButtonColumn(tblItems, a, 5, "Editar");
@@ -138,14 +140,14 @@ import Vistas.FormSocio;
 					int row = tblItems.getSelectedRow();
 					int id = Integer.parseInt(tblItems.getValueAt(row, 0).toString());
 					AreaAdministracion.getInstancia().eliminarSocio(id);
-					ListadoSocio.this.listadoSocios.fillTable("");
+					ListadoAbono.this.listadoAbono.fillTable("");
 				}
 			};
 			buttonColumn = new ButtonColumn(tblItems, a, 6, "Eliminar");
 		}
 
-		private List<VistaSocio> getItems() {
-			return AreaAdministracion.getInstancia().obtenerSocios();
+		private List<VistaAbono> getItems() {
+			return AreaAdministracion.getInstancia().obtenerAbono();
 		}
 	}
 

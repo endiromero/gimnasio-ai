@@ -138,7 +138,7 @@ public class PanelDeControl extends JFrame {
 			JMenuItem listadoAbono = new JMenuItem("Abono");
 			listadoAbono.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("Listado Abono");
+					new ListadoAbono();
 				}
 			});
 
@@ -153,7 +153,7 @@ public class PanelDeControl extends JFrame {
 					"liquidacionDeSueldo");
 			liquidacionDeSueldo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("Listado liquidacionDeSueldo");
+					new Liquidador();
 				}
 			});
 

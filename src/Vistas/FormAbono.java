@@ -21,29 +21,28 @@ import javax.swing.SwingUtilities;
 
 import Controlador.AreaAdministracion;
 import Negocio.Socio;
+import ViewModels.VistaAbono;
 import ViewModels.VistaSocio;
 
-	public class FormSocio extends JFrame{
+	public class FormAbono extends JFrame{
 		private JPanel pnlContenedor;
 		private JPanel pnlCentro;
 		private JButton btnGuardar;
 		private JLabel lblTitulo;
 		private JLabel lblNombre;
-		private JLabel lblDomicilio;
-		private JLabel lblTelefono;
-		private JLabel lblMail;
+		private JLabel lblPrecio;
+		private JLabel lblVigencia;
 		private JTextField txtNombre;
-		VistaSocio entidad;
-		private JTextField txtDomicilio;
-		private JTextField txtTelefono;
-		private JTextField txtMail;
+		VistaAbono entidad;
+		private JTextField txtPrecio;
+		private JTextField txtVigencia;
 		private int id;
-		private ListadoSocio lst;
-		FormSocio that = this;
+		private ListadoAbono lst;
+		FormAbono that = this;
 
-		public FormSocio(String frameTitle, int idSocio, ListadoSocio lst) {
-			this.id = idSocio;
-			this.lst = lst;
+		public FormAbono(String frameTitle, int idAbono, ListadoAbono listadoAbono) {
+			this.id = idAbono;
+			this.lst = listadoAbono;
 			this.entidad = null;
 			
 			// Establecer el titulo de la ventana
@@ -57,11 +56,11 @@ import ViewModels.VistaSocio;
 			// Agregar el panel al JFrame
 			this.getContentPane().add(this.getPanelContenedor());
 			
-			if(idSocio != -1){
-				VistaSocio socioAEditar = null;
-				for(VistaSocio currentVistaSocio: lst.items){
-					if(currentVistaSocio.getIdSocio() == id){
-						this.entidad = currentVistaSocio;
+			if(idAbono != -1){
+				VistaAbono abonoAEditar = null;
+				for(VistaAbono currentVistaAbono: listadoAbono.items){
+					if(currentVistaAbono.getIdAbono() == id){
+						this.entidad = currentVistaAbono;
 						break;
 					}
 				}
@@ -74,9 +73,6 @@ import ViewModels.VistaSocio;
 		
 		private void bindView(){
 			txtNombre.setText(entidad.getNombre());
-			txtDomicilio.setText(entidad.getDomicilio());
-			txtTelefono.setText(entidad.getTelefono());
-			txtMail.setText(entidad.getMail());
 		}
 
 		private JPanel getPanelContenedor() {
@@ -116,45 +112,6 @@ import ViewModels.VistaSocio;
 			gbc.weightx = 0.9;
 			pnlCentro.add(txtNombre, gbc); // agregar el textField al panel contenedor
 
-			lblDomicilio = new JLabel("Domicilio:");
-			lblDomicilio.setHorizontalAlignment(JLabel.RIGHT);
-			gbc.gridx = 0; // n�mero columna
-			gbc.gridy = 1; // n�mero fila
-			gbc.weightx = 0.1;
-			pnlCentro.add(lblDomicilio, gbc); // agregar el label al panel contenedor
-
-			txtDomicilio = new JTextField();
-			gbc.gridx = 1; // n�mero columna
-			gbc.gridy = 1; // n�mero fila
-			gbc.weightx = 0.9;
-			pnlCentro.add(txtDomicilio, gbc); // agregar el textField al panel contenedor
-
-			lblTelefono = new JLabel("Telefono:");
-			lblTelefono.setHorizontalAlignment(JLabel.RIGHT);
-			gbc.gridx = 0; // n�mero columna
-			gbc.gridy = 2; // n�mero fila
-			gbc.weightx = 0.1;
-			pnlCentro.add(lblTelefono, gbc); // agregar el label al panel contenedor
-
-			txtTelefono = new JTextField();
-			gbc.gridx = 1; // n�mero columna
-			gbc.gridy = 2; // n�mero fila
-			gbc.weightx = 0.9;
-			pnlCentro.add(txtTelefono, gbc); // agregar el textField al panel contenedor
-
-			lblMail = new JLabel("Mail:");
-			lblMail.setHorizontalAlignment(JLabel.RIGHT);
-			gbc.gridx = 0; // n�mero columna
-			gbc.gridy = 3; // n�mero fila
-			gbc.weightx = 0.1;
-			pnlCentro.add(lblMail, gbc); // agregar el label al panel contenedor
-
-			txtMail = new JTextField();
-			gbc.gridx = 1; // n�mero columna
-			gbc.gridy = 3; // n�mero fila
-			gbc.weightx = 0.9;
-			pnlCentro.add(txtMail, gbc); // agregar el textField al panel contenedor
-
 			btnGuardar = new JButton("Guardar");
 			btnGuardar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -165,32 +122,11 @@ import ViewModels.VistaSocio;
 						return;
 					}
 
-					if(txtDomicilio.getText().equals("")) {
-						JOptionPane.showMessageDialog(null,
-								"Por favor ingrese el domicilio");
-						txtDomicilio.requestFocusInWindow();
-						return;
-					}
-
-					if(txtTelefono.getText().equals("")) {
-						JOptionPane.showMessageDialog(null,
-								"Por favor ingrese el tel�fono");
-						txtTelefono.requestFocusInWindow();
-						return;
-					}
-
-					if(txtMail.getText().equals("")) {
-						JOptionPane.showMessageDialog(null,
-								"Por favor ingrese el mail");
-						txtMail.requestFocusInWindow();
-						return;
-					}
-
 					if(id == -1)
-						AreaAdministracion.getInstancia().agregarSocio(txtNombre.getText(), txtDomicilio.getText(), txtTelefono.getText(), txtMail.getText());
+						;//AreaAdministracion.getInstancia().agregarAbono(txtNombre.getText());
 					else {
 						try {
-							AreaAdministracion.getInstancia().modificarSocio(entidad.getIdSocio(), txtNombre.getText(), txtDomicilio.getText(), txtTelefono.getText(), txtMail.getText());
+							//AreaAdministracion.getInstancia().modificarSocio(entidad.getIdSocio(), txtNombre.getText(), txtDomicilio.getText(), txtTelefono.getText(), txtMail.getText());
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

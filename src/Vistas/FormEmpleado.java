@@ -12,6 +12,7 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 
 	import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -33,13 +34,17 @@ import ViewModels.VistaSocio;
 		private JLabel lblDomicilio;
 		private JLabel lblTelefono;
 		private JLabel lblMail;
+		private JLabel lblTipo;
+		private JLabel lblBruto;
 		private JLabel lblPuesto;
 		private JTextField txtNombre;
 		VistaEmpleado entidad;
 		private JTextField txtDomicilio;
 		private JTextField txtTelefono;
 		private JTextField txtMail;
+		private JTextField txtBruto;
 		private JTextField txtPuesto;
+		private JComboBox cboxTipo;
 		private int id;
 		private ListadoEmpleado lst;
 		FormEmpleado that = this;
@@ -52,7 +57,7 @@ import ViewModels.VistaSocio;
 			// Establecer el titulo de la ventana
 			this.setTitle(frameTitle);
 			// Establecer la dimension de la ventana (ancho, alto)
-			this.setSize(400, 250);
+			this.setSize(400, 500);
 			// Establecer NO dimensionable la ventana
 			this.setResizable(false);
 			// Ubicar la ventana en el centro de la pantalla
@@ -79,7 +84,7 @@ import ViewModels.VistaSocio;
 			txtNombre.setText(entidad.getNombre());
 			txtTelefono.setText(entidad.getTelefono());
 			txtMail.setText(entidad.getMail());
-			txtPuesto.setText(entidad.getPuesto());
+			//String ct = cboxTipo.getSelectedItem()(entidad.getPuesto());
 		}
 
 		private JPanel getPanelContenedor() {
@@ -88,7 +93,7 @@ import ViewModels.VistaSocio;
 			if(this.id == -1) 
 				lblTitulo = new JLabel("Alta Empleado");
 			else
-				lblTitulo = new JLabel("Edici�n Empleado");
+				lblTitulo = new JLabel("Edicion Empleado");
 			lblTitulo.setFont(new Font("Serif", Font.BOLD, 20));
 			lblTitulo.setHorizontalAlignment(JLabel.CENTER);
 			pnlContenedor.add(lblTitulo, BorderLayout.PAGE_START);
@@ -119,7 +124,7 @@ import ViewModels.VistaSocio;
 			gbc.weightx = 0.9;
 			pnlCentro.add(txtNombre, gbc); // agregar el textField al panel contenedor
 
-			lblTelefono = new JLabel("Tel�fono:");
+			lblTelefono = new JLabel("Telefono:");
 			lblTelefono.setHorizontalAlignment(JLabel.RIGHT);
 			gbc.gridx = 0; // n�mero columna
 			gbc.gridy = 1; // n�mero fila
@@ -145,19 +150,51 @@ import ViewModels.VistaSocio;
 			gbc.weightx = 0.9;
 			pnlCentro.add(txtMail, gbc); // agregar el textField al panel contenedor
 
-			lblPuesto = new JLabel("Puesto");
-			lblPuesto.setHorizontalAlignment(JLabel.RIGHT);
+			lblTipo = new JLabel("Tipo");
+			lblTipo.setHorizontalAlignment(JLabel.RIGHT);
 			gbc.gridx = 0; // n�mero columna
 			gbc.gridy = 3; // n�mero fila
 			gbc.weightx = 0.1;
-			pnlCentro.add(lblPuesto, gbc); // agregar el label al panel contenedor
+			pnlCentro.add(lblTipo, gbc); // agregar el label al panel contenedor
 
-			txtPuesto = new JTextField();
+			cboxTipo = new JComboBox();
 			gbc.gridx = 1; // n�mero columna
 			gbc.gridy = 3; // n�mero fila
 			gbc.weightx = 0.9;
-			pnlCentro.add(txtPuesto, gbc); // agregar el textField al panel contenedor
+			this.cboxTipo = new JComboBox(new String[] {"","Administrativo", "Profesor"});
+			this.cboxTipo.setEditable(true);
+			pnlCentro.add(cboxTipo, gbc);
 
+			String dep = (String)cboxTipo.getSelectedItem();
+			
+			if (dep == "Administrativo"){
+				lblPuesto = new JLabel("Puesto:");
+				lblPuesto.setHorizontalAlignment(JLabel.RIGHT);
+				gbc.gridx = 0; // n�mero columna
+				gbc.gridy = 4; // n�mero fila
+				gbc.weightx = 0.1;
+				pnlCentro.add(lblPuesto, gbc); // agregar el label al panel contenedor
+
+				txtPuesto = new JTextField();
+				gbc.gridx = 1; // n�mero columna
+				gbc.gridy = 4; // n�mero fila
+				gbc.weightx = 0.9;
+				pnlCentro.add(txtPuesto, gbc); // agregar el textField al panel contenedor
+				
+				lblBruto = new JLabel("Bruto:");
+				lblBruto.setHorizontalAlignment(JLabel.RIGHT);
+				gbc.gridx = 0; // n�mero columna
+				gbc.gridy = 5; // n�mero fila
+				gbc.weightx = 0.1;
+				pnlCentro.add(lblBruto, gbc); // agregar el label al panel contenedor
+
+				txtBruto = new JTextField();
+				gbc.gridx = 1; // n�mero columna
+				gbc.gridy = 5; // n�mero fila
+				gbc.weightx = 0.9;
+				pnlCentro.add(txtBruto, gbc); // agregar el textField al panel contenedor
+				
+			}
 			btnGuardar = new JButton("Guardar");
 			btnGuardar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -170,7 +207,7 @@ import ViewModels.VistaSocio;
 
 					if(txtTelefono.getText().equals("")) {
 						JOptionPane.showMessageDialog(null,
-								"Por favor ingrese el tel�fono");
+								"Por favor ingrese el telefono");
 						txtTelefono.requestFocusInWindow();
 						return;
 					}
@@ -181,19 +218,19 @@ import ViewModels.VistaSocio;
 						txtMail.requestFocusInWindow();
 						return;
 					}
-					
-					if(txtPuesto.getText().equals("")) {
+					String dep = (String)cboxTipo.getSelectedItem();
+					if(dep.toString().equals("")) {
 						JOptionPane.showMessageDialog(null,
 								"Por favor ingrese el puesto");
-						txtPuesto.requestFocusInWindow();
+						cboxTipo.requestFocusInWindow();
 						return;
 					}
 
 					if(id == -1)
-						AreaAdministracion.getInstancia().agregarEmpleado(txtNombre.getText(), txtTelefono.getText(), txtMail.getText(), txtPuesto.getText());
+						;//AreaAdministracion.getInstancia().agregarEmpleado(txtNombre.getText(), txtTelefono.getText(), txtMail.getText(), dep);
 					else {
 						try {
-							AreaAdministracion.getInstancia().modificarEmpleado(entidad.getCodigo(), txtNombre.getText(), txtTelefono.getText(), txtMail.getText(), txtPuesto.getText());
+							;//AreaAdministracion.getInstancia().modificarEmpleado(entidad.getCodigo(), txtNombre.getText(), txtTelefono.getText(), txtMail.getText(), dep);
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -204,7 +241,7 @@ import ViewModels.VistaSocio;
 			});
 
 			gbc.gridx = 0; // n�mero columna
-			gbc.gridy = 4; // n�mero fila
+			gbc.gridy = 7; // n�mero fila
 			gbc.gridwidth = 2; // numero de columnas de ancho
 			gbc.fill = GridBagConstraints.NONE; // rellenar la celda en ambos sentidos (horizontal y vertical)
 			pnlCentro.add(btnGuardar, gbc); // agregar el textField al panel contenedor
@@ -214,7 +251,7 @@ import ViewModels.VistaSocio;
 
 		private void closeWin() {
 			this.setVisible(false);
-			lst.fillTable();
+			lst.fillTable("");
 			this.dispose();
 		}
 	}
